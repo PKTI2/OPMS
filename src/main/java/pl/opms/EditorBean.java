@@ -1,4 +1,4 @@
-package pl.wtms;
+package pl.opms;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
