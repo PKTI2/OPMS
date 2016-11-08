@@ -3,11 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
 	http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>pl.wtms</groupId>
-    <artifactId>WTMS</artifactId>
+    <groupId>pl.opms</groupId>
+    <artifactId>OPMS</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>WTMS App</name>
+    <name>OPMS App</name>
 
     <dependencies>
 
@@ -103,6 +103,15 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.10</version>
+        </dependency>
+
+
+        <!--Bootsfaces-->
+        <dependency>
+            <groupId>net.bootsfaces</groupId>
+            <artifactId>bootsfaces</artifactId>
+            <version>0.9.1</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>
