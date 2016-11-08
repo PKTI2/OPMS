@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+    <style type="text/css">
+        .ui-layout-north {
+            z-index:20 !important;
+            overflow:visible !important;;
+        }
+
+        .ui-layout-north .ui-layout-unit-content {
+            overflow:visible !important;
+        }
+    </style>
+    <p:layout fullPage="true">
+        <p:layoutUnit position="north" resizable="true" minSize="100">
+            <ui:insert name="top"/>
+            <ui:include src="/pages/commons/topMenu.xhtml"/>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="center">
+            <ui:insert name="content"/>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="west">
+            <ui:insert name="left">
+                Left
+            </ui:insert>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="east">
+            <ui:insert name="right">
+                Right
+            </ui:insert>
+        </p:layoutUnit>
+
+        <p:layoutUnit position="south">
+            <ui:insert name="footer">
+                Footer
+            </ui:insert>
+        </p:layoutUnit>
+    </p:layout>
+</h:body>
+</html>
