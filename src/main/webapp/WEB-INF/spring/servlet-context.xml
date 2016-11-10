@@ -74,6 +74,9 @@
     </bean>
 
     <webflow:flow-executor id="flowExecutor" flow-registry="flowRegistry">
+        <webflow:flow-execution-listeners>
+            <webflow:listener ref="facesContextListener"/>
+        </webflow:flow-execution-listeners>
     </webflow:flow-executor>
 
 

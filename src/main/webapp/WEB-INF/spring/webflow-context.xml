@@ -10,13 +10,6 @@
             http://www.springframework.org/schema/faces
             http://www.springframework.org/schema/faces/spring-faces-2.4.xsd">
 
-    <!-- Executes flows: the central entry point into the Spring Web Flow system -->
-    <flow-executor id="flowExecutor">
-        <flow-execution-listeners>
-            <listener ref="facesContextListener"/>
-        </flow-execution-listeners>
-    </flow-executor>
-
     <!-- The registry of executable flow definitions -->
     <flow-registry id="flowRegistry" flow-builder-services="flowBuilderServices" base-path="/WEB-INF/flows">
         <flow-location-pattern value="/**/*-flow.xml"/>
