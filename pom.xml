@@ -101,6 +101,12 @@
             <version>2.4.4.RELEASE</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.3.RELEASE</version>
+        </dependency>
+
 
         <!--Log4J-->
 
@@ -126,6 +132,15 @@
             <version>0.9.1</version>
             <scope>compile</scope>
         </dependency>
+
+
+        <!--Junit-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
 
     </dependencies>
     <build>
