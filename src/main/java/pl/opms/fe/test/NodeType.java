@@ -9,5 +9,5 @@ public enum NodeType {
     DOUBLE,
     COMBO_BOX,
     BOOL_CHECK_BOX,
-    FILE;
+    FILE
 }

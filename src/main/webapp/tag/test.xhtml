@@ -10,7 +10,7 @@
         <p:outputLabel value="#{test.name}"/>
         <h:form>
             <p:panelGrid columns="1">
-                <c:forEach var="node" items="#{test.nodes}">
+                <c:forEach var="node" items="#{test.nodeEntities}">
                     <c:if test="${node.nodeType == 'STRING'}">
                         <p:outputLabel value="#{node.label}"/>
                         <p:inputText value="#{node.model.stringValue}"/>

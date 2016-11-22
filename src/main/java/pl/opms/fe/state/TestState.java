@@ -3,11 +3,7 @@ package pl.opms.fe.state;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.primefaces.model.UploadedFile;
-import pl.opms.fe.test.Node;
-import pl.opms.fe.test.Test;
-
-import java.util.List;
+import pl.opms.be.entity.TestEntity;
 
 /**
  * Created by Piotr Borczyk on 22.11.2016.
@@ -17,5 +13,5 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class TestState extends AbstractState {
-    Test test = new Test();
+    TestEntity testEntity = new TestEntity();
 }
