@@ -21,4 +21,20 @@ public class DepartmentEntity {
     @Column(name = "departmentname")
     private String departmentName;
 
+    public void setDepartmentName(String departmentName) {this.departmentName = departmentName;}
+    public String getDepartmentName() {return departmentName;}
+
+//    public List<RoomEntity> getRoomsList() {return roomsList;}
+//    public void setRoomsList(List<RoomEntity> roomsList) {this.roomsList = roomsList;}
+//
+    //    public void addRoomToList(){
+////        ???
+//    }
+//    public Long getRoom(){
+////        ???
+//        return new Long(0);
+//    }
+//    public void removeRoom(Long number){
+////        ???
+//    }
 }

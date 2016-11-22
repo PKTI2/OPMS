@@ -25,4 +25,17 @@ public class UserEntity {
     private Long personalDataId;
 
 //    private PersonalDataEntity personalDataEntity;
+
+
+    public void setPassword(String password) {this.password = password;}
+    public String getPassword() {return password;}
+
+    public void setPersonalDataId(Long personalDataId) {this.personalDataId = personalDataId;}
+    public Long getPersonalDataId() {return personalDataId;}
+
+    public void setUserName(String userName) {this.userName = userName;}
+    public String getUserName() {return userName;}
+
+//    public void setPersonalDataEntity(PersonalDataEntity personalDataEntity) {this.personalDataEntity = personalDataEntity;}
+//    public PersonalDataEntity getPersonalDataEntity() {return personalDataEntity;}
 }

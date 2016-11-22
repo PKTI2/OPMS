@@ -27,4 +27,15 @@ public class RoomEntity {
 //    @Column(name = "departmentid")
 //    private Long departmentId; //nowe pole
 
+    public void setCapacity(Integer capacity) {this.capacity = capacity;}
+    public Integer getCapacity() {return capacity;}
+
+    public void setFreeBed(Integer freeBed) {this.freeBed = freeBed;}
+    public Integer getFreeBed() {return freeBed;}
+
+    public void setRoomNumber(Integer roomNumber) {this.roomNumber = roomNumber;}
+    public Integer getRoomNumber() {return roomNumber;}
+
+//    public void setDepartmentId(Long departmentId) {this.departmentId = departmentId;}
+//    public Long getDepartmentId() {return departmentId;}
 }
