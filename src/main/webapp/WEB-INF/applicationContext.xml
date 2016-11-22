@@ -14,4 +14,7 @@
     <!-- Scan for all of Spring components such as Spring Service -->
     <context:component-scan base-package="pl.opms"/>
 
+    <import resource="spring/hibernate-context.xml"/>
+
+    <import resource="spring/springdata-context.xml"/>
 </beans>
