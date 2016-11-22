@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+    <ui:composition>
+        <p:outputLabel value="#{test.name}"/>
+        <h:form>
+            <p:panelGrid columns="1">
+                <c:forEach var="node" items="#{test.nodes}">
+                    <c:if test="${node.nodeType == 'STRING'}">
+                        <p:outputLabel value="#{node.label}"/>
+                        <p:inputText value="#{node.model.stringValue}"/>
+                    </c:if>
+
+                    <c:if test="${node.nodeType == 'INT'}">
+                        <p:outputLabel value="#{node.label}"/>
+                        <p:inputNumber decimalPlaces="0" value="#{node.model.intValue}" converter="javax.faces.Integer"
+                                       thousandSeparator=""/>
+                    </c:if>
+
+                    <c:if test="${node.nodeType == 'DOUBLE'}">
+                        <p:outputLabel value="#{node.label}"/>
+                        <p:inputNumber value="#{node.model.doubleValue}" converter="javax.faces.Double"
+                                       thousandSeparator=""/>
+                    </c:if>
+
+                    <c:if test="${node.nodeType == 'COMBO_BOX'}">
+                        <p:outputLabel value="#{node.label}"/>
+                    </c:if>
+
+                    <c:if test="${node.nodeType == 'BOOL_CHECK_BOX'}">
+                        <p:outputLabel value="#{node.label}"/>
+                        <p:selectBooleanCheckbox value="#{node.model.booleanValue}"/>
+                    </c:if>
+
+                    <c:if test="${node.nodeType == 'FILE'}">
+                        <p:outputLabel value="#{node.label}"/>
+                        <p:fileUpload value="#{node.model.fileValue}"/>
+                    </c:if>
+                </c:forEach>
+            </p:panelGrid>
+        </h:form>
+    </ui:composition>
+</h:body>
+</html>

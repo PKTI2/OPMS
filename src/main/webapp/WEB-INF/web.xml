@@ -21,6 +21,11 @@
     </listener>
 
     <context-param>
+        <param-name>facelets.LIBRARIES</param-name>
+        <param-value>/tag/test.taglib.xml</param-value>
+    </context-param>
+
+    <context-param>
         <param-name>javax.faces.DEFAULT_SUFFIX</param-name>
         <param-value>.xhtml</param-value>
     </context-param>
