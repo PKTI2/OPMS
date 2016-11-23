@@ -4,16 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "USER_TABLE")
-public class UserEntity {
+public class UserEntity extends BaseEntity {
 
     @Column(name = "username")
     private String userName;
@@ -24,8 +22,12 @@ public class UserEntity {
     @Column(name = "personaldataid")
     private Long personalDataId;
 
-//    private PersonalDataEntity personalDataEntity;
+    private PersonalDataEntity personalDataEntity;
+    @OneToOne (cascade = {CascadeType.ALL})
+    @JoinColumn(name="PersonalDataEntity.id")
+    public PersonalDataEntity getPersonalDataEntity(){return personalDataEntity;}
 
+    public void setPersonalDataEntity(PersonalDataEntity personalDataEntity) {this.personalDataEntity = personalDataEntity;}
 
     public void setPassword(String password) {this.password = password;}
     public String getPassword() {return password;}
@@ -36,6 +38,4 @@ public class UserEntity {
     public void setUserName(String userName) {this.userName = userName;}
     public String getUserName() {return userName;}
 
-//    public void setPersonalDataEntity(PersonalDataEntity personalDataEntity) {this.personalDataEntity = personalDataEntity;}
-//    public PersonalDataEntity getPersonalDataEntity() {return personalDataEntity;}
 }

@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ADDRESS_TABLE")
-public class AddressEntity {
+public class AddressEntity extends BaseEntity {
 
     @Column(name = "street")
     private String street;

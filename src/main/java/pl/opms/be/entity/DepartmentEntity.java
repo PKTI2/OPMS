@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -14,9 +13,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "DEPARTMENT_TABLE")
-public class DepartmentEntity {
+public class DepartmentEntity extends BaseEntity {
 
-//    private List<RoomEntity> roomsList;
+    private List<RoomEntity> roomList = new ArrayList<RoomEntity>();
+
+    @OneToMany(cascade={CascadeType.ALL})
+    @JoinColumn(name="RoomEntity.departmentId")
+    public List<RoomEntity> getRoomList(){return roomList;}
+//    department.getRoomList().add(roomEntity);
+//    department.getRoomList().remove(roomEntity);
+
 
     @Column(name = "departmentname")
     private String departmentName;
@@ -24,17 +30,4 @@ public class DepartmentEntity {
     public void setDepartmentName(String departmentName) {this.departmentName = departmentName;}
     public String getDepartmentName() {return departmentName;}
 
-//    public List<RoomEntity> getRoomsList() {return roomsList;}
-//    public void setRoomsList(List<RoomEntity> roomsList) {this.roomsList = roomsList;}
-//
-    //    public void addRoomToList(){
-////        ???
-//    }
-//    public Long getRoom(){
-////        ???
-//        return new Long(0);
-//    }
-//    public void removeRoom(Long number){
-////        ???
-//    }
 }

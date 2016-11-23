@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ROOM_TABLE")
-public class RoomEntity {
+public class RoomEntity extends BaseEntity {
 
     @Column(name = "capacity")
     private Integer capacity;
@@ -24,8 +24,8 @@ public class RoomEntity {
     @Column(name = "roomnumber")
     private Integer roomNumber;
 
-//    @Column(name = "departmentid")
-//    private Long departmentId; //nowe pole
+    @Column(name = "departmentid")
+    private Long departmentId; //nowe pole
 
     public void setCapacity(Integer capacity) {this.capacity = capacity;}
     public Integer getCapacity() {return capacity;}
@@ -36,6 +36,6 @@ public class RoomEntity {
     public void setRoomNumber(Integer roomNumber) {this.roomNumber = roomNumber;}
     public Integer getRoomNumber() {return roomNumber;}
 
-//    public void setDepartmentId(Long departmentId) {this.departmentId = departmentId;}
-//    public Long getDepartmentId() {return departmentId;}
+    public void setDepartmentId(Long departmentId) {this.departmentId = departmentId;}
+    public Long getDepartmentId() {return departmentId;}
 }
