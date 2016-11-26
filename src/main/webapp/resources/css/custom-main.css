@@ -1,0 +1,15 @@
+body {
+    margin: 0px;
+    padding: 0;
+    font-size: 12px;
+    color: #616161;
+}
+
+.ui-layout-north {
+    z-index:20 !important;
+    overflow:visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+    overflow:visible !important;
+}

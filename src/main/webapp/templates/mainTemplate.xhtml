@@ -9,16 +9,6 @@
 <h:head>
 </h:head>
 <h:body>
-    <style type="text/css">
-        .ui-layout-north {
-            z-index:20 !important;
-            overflow:visible !important;;
-        }
-
-        .ui-layout-north .ui-layout-unit-content {
-            overflow:visible !important;
-        }
-    </style>
     <p:layout fullPage="true">
         <p:layoutUnit position="north" resizable="true" minSize="100">
             <ui:insert name="top"/>
@@ -31,21 +21,26 @@
 
         <p:layoutUnit position="west">
             <ui:insert name="left">
-                Left
+                <!--INSERT-->
             </ui:insert>
         </p:layoutUnit>
 
         <p:layoutUnit position="east">
             <ui:insert name="right">
-                Right
+               <!--INSERT-->
             </ui:insert>
         </p:layoutUnit>
 
         <p:layoutUnit position="south">
             <ui:insert name="footer">
-                Footer
+                <p:panelGrid columns="1" columnClasses="centered">
+                        <p:outputLabel value="Online Patient Monitoring System DEV"/>
+                </p:panelGrid>
             </ui:insert>
         </p:layoutUnit>
     </p:layout>
+    <f:facet name="last">
+        <h:outputStylesheet name="css/custom-main.css" />
+    </f:facet>
 </h:body>
 </html>
