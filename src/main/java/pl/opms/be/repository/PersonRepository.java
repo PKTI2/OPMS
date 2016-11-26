@@ -12,7 +12,8 @@ import java.util.List;
  */
 
 @Repository
-public interface PersonRepository extends CrudRepository<PersonEntity,Long> {
+public interface PersonRepository extends CrudRepository<PersonEntity, Long> {
     List<PersonEntity> findByLastname(String lastname);
+
     List<PersonEntity> findByFirstname(String firstname);
 }

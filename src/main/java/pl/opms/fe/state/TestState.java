@@ -3,7 +3,7 @@ package pl.opms.fe.state;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import pl.opms.be.entity.TestEntity;
+import pl.opms.be.entity.TestInstanceEntity;
 
 /**
  * Created by Piotr Borczyk on 22.11.2016.
@@ -13,5 +13,5 @@ import pl.opms.be.entity.TestEntity;
 @Data
 @NoArgsConstructor
 public class TestState extends AbstractState {
-    TestEntity testEntity = new TestEntity();
+    TestInstanceEntity testInstanceEntity = new TestInstanceEntity();
 }

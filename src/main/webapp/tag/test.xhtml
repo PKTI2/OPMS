@@ -10,38 +10,39 @@
         <p:outputLabel value="#{test.name}"/>
         <h:form>
             <p:panelGrid columns="1">
-                <c:forEach var="node" items="#{test.nodeEntities}">
-                    <c:if test="${node.nodeType == 'STRING'}">
-                        <p:outputLabel value="#{node.label}"/>
-                        <p:inputText value="#{node.model.stringValue}"/>
+                <c:forEach var="node" items="#{test.nodes}">
+                    <c:if test="${node.nodeDefinition.nodeType == 'STRING'}">
+                        <p:outputLabel value="#{node.nodeDefinition.label}"/>
+                        <p:inputText value="#{node.stringValue}"/>
                     </c:if>
 
-                    <c:if test="${node.nodeType == 'INT'}">
-                        <p:outputLabel value="#{node.label}"/>
-                        <p:inputNumber decimalPlaces="0" value="#{node.model.intValue}" converter="javax.faces.Integer"
+                    <c:if test="${node.nodeDefinition.nodeType == 'INT'}">
+                        <p:outputLabel value="#{node.nodeDefinition.label}"/>
+                        <p:inputNumber decimalPlaces="0" value="#{node.intValue}" converter="javax.faces.Integer"
                                        thousandSeparator=""/>
                     </c:if>
 
-                    <c:if test="${node.nodeType == 'DOUBLE'}">
-                        <p:outputLabel value="#{node.label}"/>
-                        <p:inputNumber value="#{node.model.doubleValue}" converter="javax.faces.Double"
+                    <c:if test="${node.nodeDefinition.nodeType == 'DOUBLE'}">
+                        <p:outputLabel value="#{node.nodeDefinition.label}"/>
+                        <p:inputNumber value="#{node.doubleValue}" converter="javax.faces.Double"
                                        thousandSeparator=""/>
                     </c:if>
 
-                    <c:if test="${node.nodeType == 'COMBO_BOX'}">
-                        <p:outputLabel value="#{node.label}"/>
+                    <c:if test="${node.nodeDefinition.nodeType == 'COMBO_BOX'}">
+                        <p:outputLabel value="#{node.nodeDefinition.label}"/>
                     </c:if>
 
-                    <c:if test="${node.nodeType == 'BOOL_CHECK_BOX'}">
-                        <p:outputLabel value="#{node.label}"/>
-                        <p:selectBooleanCheckbox value="#{node.model.booleanValue}"/>
+                    <c:if test="${node.nodeDefinition.nodeType == 'BOOL_CHECK_BOX'}">
+                        <p:outputLabel value="#{node.nodeDefinition.label}"/>
+                        <p:selectBooleanCheckbox value="#{node.booleanValue}"/>
                     </c:if>
 
-                    <c:if test="${node.nodeType == 'FILE'}">
-                        <p:outputLabel value="#{node.label}"/>
-                        <p:fileUpload value="#{node.model.fileValue}"/>
+                    <c:if test="${node.nodeDefinition.nodeType == 'FILE'}">
+                        <p:outputLabel value="#{node.nodeDefinition.label}"/>
+                        <p:fileUpload value="#{node.fileValue}"/>
                     </c:if>
                 </c:forEach>
+                <p:commandButton value="Zapisz" actionListener="#{controller.save(state)}"/>
             </p:panelGrid>
         </h:form>
     </ui:composition>

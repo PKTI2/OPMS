@@ -10,6 +10,6 @@ import pl.opms.be.entity.PersonEntity;
  */
 
 @Repository
-public interface PersonPageRepository extends PagingAndSortingRepository<PersonEntity,Long> {
+public interface PersonPageRepository extends PagingAndSortingRepository<PersonEntity, Long> {
     //findAll() Jest domyślnie dostępna
 }

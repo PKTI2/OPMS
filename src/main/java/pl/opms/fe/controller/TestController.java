@@ -1,36 +1,48 @@
 package pl.opms.fe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pl.opms.be.repository.TestRepository;
+import pl.opms.be.entity.NodeDefinitionEntity;
+import pl.opms.be.entity.TestDefinitionEntity;
+import pl.opms.be.entity.TestInstanceEntity;
+import pl.opms.be.repository.TestDefinitionRepository;
+import pl.opms.be.repository.TestInstanceRepository;
 import pl.opms.fe.state.TestState;
-import pl.opms.be.entity.NodeEntity;
-import pl.opms.be.entity.NodeModelEntity;
 import pl.opms.fe.test.NodeType;
-import pl.opms.be.entity.TestEntity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * Created by Piotr Borczyk on 22.11.2016.
  */
 public class TestController extends AbstractController<TestState> {
     @Autowired
-    private transient TestRepository testRepository;
+    private transient TestDefinitionRepository testDefinitionRepository;
+
+    @Autowired
+    private transient TestInstanceRepository testInstanceRepository;
 
     @Override
     public void init(TestState state) {
-        TestEntity testEntity = new TestEntity();
-        testEntity.setName("Ciśnienie");
-        List<NodeEntity> nodeEntities = new ArrayList<>();
-        nodeEntities.add(new NodeEntity("Imię", NodeType.STRING,new NodeModelEntity()));
-        nodeEntities.add(new NodeEntity("CheckBoksik",NodeType.BOOL_CHECK_BOX,new NodeModelEntity()));
-        nodeEntities.add(new NodeEntity("Int",NodeType.INT,new NodeModelEntity()));
-        nodeEntities.add(new NodeEntity("Double",NodeType.DOUBLE,new NodeModelEntity()));
-        nodeEntities.add(new NodeEntity("Plik",NodeType.FILE,new NodeModelEntity()));
-        nodeEntities.add(new NodeEntity("Dzik",NodeType.BOOL_CHECK_BOX,new NodeModelEntity()));
-        testEntity.setNodeEntities(nodeEntities);
-        state.setTestEntity(testEntity);
-        testRepository.save(testEntity);
+        TestDefinitionEntity testDefinitionEntity = new TestDefinitionEntity(
+                "test", false,
+                Arrays.asList(
+                        new NodeDefinitionEntity("Ten", NodeType.STRING),
+                        new NodeDefinitionEntity("Widok", NodeType.BOOL_CHECK_BOX),
+                        new NodeDefinitionEntity("Jest", NodeType.INT),
+                        new NodeDefinitionEntity("Generowany", NodeType.DOUBLE),
+                        new NodeDefinitionEntity("Dynamicznie", NodeType.FILE),
+                        new NodeDefinitionEntity("Na podstawie ", NodeType.BOOL_CHECK_BOX),
+                        new NodeDefinitionEntity("Kodu Java i bazy danych ", NodeType.BOOL_CHECK_BOX)
+                )
+        );
+        testDefinitionRepository.save(testDefinitionEntity);
+        testDefinitionRepository.findAll().forEach(System.out::println);
+
+        TestInstanceEntity testInstanceEntity = new TestInstanceEntity(testDefinitionRepository.findOne(1L));
+        state.setTestInstanceEntity(testInstanceEntity);
+    }
+
+    public void save(TestState testState) {
+        testInstanceRepository.save(testState.getTestInstanceEntity());
     }
 }
