@@ -24,4 +24,5 @@ public abstract class BaseEntity implements Serializable {
     @Column(name = "id", nullable = false)
     protected Long id;
 
+    public Long getId() {return id;}
 }
