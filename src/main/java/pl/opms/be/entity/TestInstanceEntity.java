@@ -1,6 +1,7 @@
 package pl.opms.be.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -18,6 +19,7 @@ import java.util.List;
 
 @ToString
 @Entity
+@EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
 

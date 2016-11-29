@@ -2,6 +2,7 @@ package pl.opms.be.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.primefaces.model.UploadedFile;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
  */
 
 @ToString
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 @AllArgsConstructor

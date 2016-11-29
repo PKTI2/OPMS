@@ -2,6 +2,7 @@ package pl.opms.be.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import pl.opms.fe.test.NodeType;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
  */
 
 @ToString
+@EqualsAndHashCode(callSuper = false)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
