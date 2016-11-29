@@ -2,19 +2,20 @@ package pl.opms.be.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-@EqualsAndHashCode(callSuper = false)
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-
-@Entity
 @Table(name = "USER_TABLE")
-@Inheritance( strategy = InheritanceType.JOINED )
 public class UserEntity extends BaseEntity {
 
     @Column(name = "username")
@@ -23,12 +24,43 @@ public class UserEntity extends BaseEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "personal_data_id")
+    @Column(name = "personaldataid")
     private Long personalDataId;
 
-    @OneToOne (cascade = {CascadeType.ALL})
-    //@JoinColumn(name="PersonalDataEntity.id")
     private PersonalDataEntity personalDataEntity;
 
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "PersonalDataEntity.id")
+    public PersonalDataEntity getPersonalDataEntity() {
+        return personalDataEntity;
+    }
+
+    public void setPersonalDataEntity(PersonalDataEntity personalDataEntity) {
+        this.personalDataEntity = personalDataEntity;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPersonalDataId(Long personalDataId) {
+        this.personalDataId = personalDataId;
+    }
+
+    public Long getPersonalDataId() {
+        return personalDataId;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
 
 }
