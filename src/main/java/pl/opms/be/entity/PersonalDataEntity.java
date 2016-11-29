@@ -2,13 +2,18 @@ package pl.opms.be.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 @NoArgsConstructor
@@ -16,61 +21,24 @@ import java.util.List;
 @Table(name = "PERSONAL_DATA_TABLE")
 public class PersonalDataEntity extends BaseEntity {
 
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "lastname")
-    private String lastname;
+    @Column(name = "last_name")
+    private String lastName;
 
-
-//    @Column(name = "addressid")
-//    private Long addressId; //czy potrzebne
+    @Column(name = "address")
     private AddressEntity address;
-    @ManyToOne
-    @JoinColumn (name = "AddressEntity.id")
-    public AddressEntity getAddress(){return address;}
 
-    public void setAddress(AddressEntity address) {this.address = address;}
-
-    //    @Column(name = "mailaddressid")
-//    private Long mailAddressId; //czy potrzebne
+    @Column(name = "mail_address")
     private AddressEntity mailAddress;
-    @ManyToOne
-    @JoinColumn (name = "mailAddressEntity.id")
-    public AddressEntity getMailAddress(){return mailAddress;}
 
-    public void setMailAddress(AddressEntity mailAddress) {this.mailAddress = mailAddress;}
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PhoneNumberEntity> phoneNumberList;
 
-    // nowa tabela idrekordu/idusera/telefon
-    private List<PhoneNumberEntity> phoneNumberList = new ArrayList<PhoneNumberEntity>();
-    @OneToMany(cascade={CascadeType.ALL})
-    @JoinColumn(name="NumberEntity.personalDataId")
-    public List<PhoneNumberEntity> getPhoneNumberList(){return phoneNumberList;}
-//    person.getPhoneNumberList().add(phoneEntity); //phoneEntity(this.getId(),"123-456-789");
-
-
-    @Column(name = "peselnumber")
+    @Column(name = "pesel_number")
     private String peselNumber;
 
-    @Column(name = "birthdate")
+    @Column(name = "birth_date")
     private Date birthDate;
-
-    UserEntity userEntity;
-    @OneToOne(mappedBy = "userEntity")
-    public UserEntity getUserEntity(){return userEntity;}
-
-    public void setUserEntity(UserEntity userEntity) {this.userEntity = userEntity;}
-
-    public void setBirthDate(Date birthDate) {this.birthDate = birthDate;}
-    public Date getBirthDate() {return birthDate;}
-
-    public void setFirstName(String firstName) {this.firstName = firstName;}
-    public String getFirstName() {return firstName;}
-
-    public void setLastname(String lastname) {this.lastname = lastname;}
-    public String getLastname() {return lastname;}
-
-    public void setPeselNumber(String peselNumber) {this.peselNumber = peselNumber;}
-    public String getPeselNumber() {return peselNumber;}
-
 }
