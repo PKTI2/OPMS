@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.enterprise.inject.Default;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,43 +25,13 @@ public class UserEntity extends BaseEntity {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "personaldataid")
-    private Long personalDataId;
+    @Column(name = "enabled")
+    private boolean enabled = false;
 
-    private PersonalDataEntity personalDataEntity;
+    @OneToOne(cascade = CascadeType.MERGE)
+    private RoleEntity roleEntity;
 
     @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "PersonalDataEntity.id")
-    public PersonalDataEntity getPersonalDataEntity() {
-        return personalDataEntity;
-    }
-
-    public void setPersonalDataEntity(PersonalDataEntity personalDataEntity) {
-        this.personalDataEntity = personalDataEntity;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPersonalDataId(Long personalDataId) {
-        this.personalDataId = personalDataId;
-    }
-
-    public Long getPersonalDataId() {
-        return personalDataId;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
+    private PersonalDataEntity personalDataEntity;
 
 }
