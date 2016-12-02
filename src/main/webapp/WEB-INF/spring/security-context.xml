@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!--
+        Configure Spring Security
+    -->
+
+
+    <security:http auto-config="true" use-expressions="true">
+        <security:intercept-url pattern="/" access="isAnonymous()"/>
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+        <security:form-login
+                login-processing-url="/j_spring_security_check"
+                default-target-url="/index.xhtml"/>
+        <security:logout/>
+    </security:http>
+
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:jdbc-user-service data-source-ref="dataSource"
+                                        users-by-username-query=
+                                                "SELECT username, password, enabled FROM USER_TABLE WHERE username=?"
+                                        authorities-by-username-query=
+                                                "SELECT username, 'ROLE_USER' FROM USER_TABLE WHERE username =?"/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+</beans>
