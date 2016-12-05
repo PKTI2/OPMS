@@ -10,11 +10,21 @@
     <!-- Enable Spring Annotation Configuration -->
 
 
-    <context:annotation-config />
+    <context:annotation-config/>
     <!-- Scan for all of Spring components such as Spring Service -->
     <context:component-scan base-package="pl.opms"/>
 
     <import resource="spring/hibernate-context.xml"/>
     <import resource="spring/security-context.xml"/>
     <import resource="spring/springdata-context.xml"/>
+
+    <!--internacjonalization-->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>plPL</value>
+            </list>
+        </property>
+    </bean>
 </beans>
