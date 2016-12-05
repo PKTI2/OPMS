@@ -5,14 +5,33 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:sec="http://www.springframework.org/security/tags"
+      xmlns:b="http://bootsfaces.net/ui">
 <h:head>
 </h:head>
 <h:body>
     <p:layout fullPage="true">
         <p:layoutUnit position="north" resizable="true" minSize="100">
-            <ui:insert name="top"/>
-            <ui:include src="/templates/topMenu.xhtml"/>
+            <b:navBar brand="OPMS" brandHref="#">
+                <b:navbarLinks>
+                    <sec:authorize access="hasRole('ROLE_USER')">
+                        <b:navLink value="Test" href="/test-flow.flow"></b:navLink>
+                    </sec:authorize>
+                    <sec:authorize access="hasRole('ROLE_ADMINN')">
+                    <b:navLink value="Link" href="#"></b:navLink>
+                    </sec:authorize>
+                </b:navbarLinks>
+
+                <!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
+                <b:navbarLinks pull="right">
+                    <b:navLink>
+                            <form id="logout_button" action="/appLogout" method="post">
+                                <input type="submit" value="Logout"/>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </form>
+                    </b:navLink>
+                </b:navbarLinks>
+            </b:navBar>
         </p:layoutUnit>
 
         <p:layoutUnit position="center">
@@ -27,20 +46,20 @@
 
         <p:layoutUnit position="east">
             <ui:insert name="right">
-               <!--INSERT-->
+                <!--INSERT-->
             </ui:insert>
         </p:layoutUnit>
 
         <p:layoutUnit position="south">
             <ui:insert name="footer">
                 <p:panelGrid columns="1" columnClasses="centered">
-                        <p:outputLabel value="Online Patient Monitoring System DEV"/>
+                    <p:outputLabel value="Online Patient Monitoring System DEV"/>
                 </p:panelGrid>
             </ui:insert>
         </p:layoutUnit>
     </p:layout>
     <f:facet name="last">
-        <h:outputStylesheet name="css/custom-main.css" />
+        <h:outputStylesheet name="css/custom-main.css"/>
     </f:facet>
 </h:body>
 </html>
