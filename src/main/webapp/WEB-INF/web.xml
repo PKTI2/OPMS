@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          id="WebApp_ID" version="2.5">
 
-
     <display-name>JavaServerFaces</display-name>
-
-
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
-
     <filter-mapping>
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
 
     <!-- Add Support for Spring -->
     <listener>
@@ -33,7 +29,7 @@
     </listener>
 
     <context-param>
-        <param-name>facelets.LIBRARIES</param-name>
+        <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
         <param-value>/tag/test.taglib.xml;/tag/springsecurity.taglib.xml</param-value>
     </context-param>
 
@@ -43,7 +39,12 @@
     </context-param>
 
     <context-param>
-        <param-name>facelets.SKIP_COMMENTS</param-name>
+        <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>primefaces.FONT_AWESOME</param-name>
         <param-value>true</param-value>
     </context-param>
 
