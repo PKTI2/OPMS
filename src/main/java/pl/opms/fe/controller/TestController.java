@@ -1,12 +1,13 @@
 package pl.opms.fe.controller;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.opms.be.entity.NodeDefinitionEntity;
 import pl.opms.be.entity.TestDefinitionEntity;
 import pl.opms.be.entity.TestInstanceEntity;
 import pl.opms.be.repository.TestDefinitionRepository;
 import pl.opms.be.repository.TestInstanceRepository;
-import pl.opms.fe.state.TestState;
 import pl.opms.fe.test.NodeType;
 
 import java.util.Arrays;
@@ -14,15 +15,20 @@ import java.util.Arrays;
 /**
  * Created by Piotr Borczyk on 22.11.2016.
  */
-public class TestController extends AbstractController<TestState> {
+public class TestController extends AbstractController {
+
     @Autowired
     private transient TestDefinitionRepository testDefinitionRepository;
 
     @Autowired
     private transient TestInstanceRepository testInstanceRepository;
 
+    @Getter
+    @Setter
+    private TestInstanceEntity testInstanceEntity = new TestInstanceEntity();
+
     @Override
-    public void init(TestState state) {
+    public void init() {
         TestDefinitionEntity testDefinitionEntity = new TestDefinitionEntity(
                 "test", false,
                 Arrays.asList(
@@ -35,14 +41,11 @@ public class TestController extends AbstractController<TestState> {
                         new NodeDefinitionEntity("Kodu Java i bazy danych ", NodeType.BOOL_CHECK_BOX)
                 )
         );
-        testDefinitionRepository.save(testDefinitionEntity);
-        testDefinitionRepository.findAll().forEach(System.out::println);
 
-        TestInstanceEntity testInstanceEntity = new TestInstanceEntity(testDefinitionRepository.findOne(1L));
-        state.setTestInstanceEntity(testInstanceEntity);
+        this.testInstanceEntity = new TestInstanceEntity(testDefinitionEntity);
     }
 
-    public void save(TestState testState) {
-        testInstanceRepository.save(testState.getTestInstanceEntity());
+    public void save() {
+        testInstanceRepository.save(testInstanceEntity);
     }
 }

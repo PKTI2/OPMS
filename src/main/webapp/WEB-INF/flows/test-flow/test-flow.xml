@@ -4,10 +4,9 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
     <var class="pl.opms.fe.controller.TestController" name="controller"/>
-    <var class="pl.opms.fe.state.TestState" name="state"/>
 
     <on-start>
-        <evaluate expression="controller.init(state)"/>
+        <evaluate expression="controller.init()"/>
     </on-start>
 
     <view-state id="test">
