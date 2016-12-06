@@ -16,7 +16,7 @@
         <security:intercept-url pattern="/" access="isAnonymous()"/>
         <security:intercept-url pattern="/login/login.xhtml" access="isAnonymous()"/>
         <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
-
+        <security:csrf disabled="true"/>
 
         <security:form-login
                 login-page="/login/login.xhtml"
