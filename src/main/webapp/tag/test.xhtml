@@ -42,7 +42,7 @@
                         <p:fileUpload value="#{node.fileValue}"/>
                     </c:if>
                 </c:forEach>
-                <p:commandButton value="Zapisz" actionListener="#{controller.save(state)}"/>
+                <p:commandButton value="Zapisz" actionListener="#{controller.save()}"/>
             </p:panelGrid>
         </h:form>
     </ui:composition>
