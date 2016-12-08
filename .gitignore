@@ -9,6 +9,7 @@
 # Files
 *.iml
 jdbc.properties
+application.properties
 
 # Package Files #
 *.jar
