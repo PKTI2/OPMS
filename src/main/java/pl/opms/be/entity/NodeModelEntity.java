@@ -5,11 +5,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.primefaces.model.UploadedFile;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -33,9 +31,9 @@ public class NodeModelEntity extends BaseEntity {
     private Double doubleValue;
 
 
-    @Column(name = "file_value")
-    @Lob
-    private UploadedFile fileValue;
+//    @Column(name = "file_value")
+//    @Lob
+//    private UploadedFile fileValue;
 
     @Column(name = "boolean_value")
     private Boolean booleanValue;

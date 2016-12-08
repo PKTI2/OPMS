@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import pl.opms.fe.test.NodeType;
+import pl.opms.consts.NodeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
