@@ -35,6 +35,6 @@ public class PrivilegeEntity extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
-        this.nameRole = "ROLE_" + name.toUpperCase();
+        this.nameRole = "ROLE_" + name.toUpperCase().replace(' ', '_');
     }
 }
