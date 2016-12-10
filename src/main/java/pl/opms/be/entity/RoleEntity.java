@@ -11,7 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Dawid on 29.11.2016 at 19:45.
@@ -30,5 +30,5 @@ public class RoleEntity extends BaseEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.MERGE)
-    private List<PrivilegeEntity> privilegeEntities;
+    private Set<PrivilegeEntity> privilegeEntities;
 }
