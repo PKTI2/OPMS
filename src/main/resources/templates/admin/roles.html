@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Spring Security Example </title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!-- Bootstrap -->
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <form th:action="@{/admin/roles/save}" th:object="${wraper}" method="post">
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default" th:each="role, iterStat : *{roles}">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" th:href="'#collapse' + ${iterStat.count}"
+                           th:text="*{roles[__${iterStat.index}__].name}"></a>
+                    </h4>
+                </div>
+                <div th:id="'collapse' + ${iterStat.count}" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>nazwa</th>
+                                <th>opis</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="permission, iter : *{roles[__${iterStat.index}__].permissions}">
+                                <td style="width: 33%">
+                                    <!--th:text="${permissions.enable}"-->
+                                    <!--<label th:for="${#ids.next('covered')}" th:text="#{seedstarter.covered}">Covered</label>-->
+                                    <!--<input type="checkbox" th:field="*{covered}" />-->
+                                    <!--<label th:for"${#ids.next()}-->
+                                    <input type="checkbox" th:value="*{roles[__${iterStat.index}__].permissions[__${iter.index}__].enable}"
+                                           th:checked="*{roles[__${iterStat.index}__].permissions[__${iter.index}__].enable}"
+                                           th:field="*{roles[__${iterStat.index}__].permissions[__${iter.index}__].enable}"/>
+                                </td>
+                                <!--<td><input type="text" th:field="*{privilegeEntity.name}"/></td>-->
+                                <td style="width: 33%" th:text="*{roles[__${iterStat.index}__].permissions[__${iter.index}__].privilegeEntity.name}"></td>
+                                <td style="width: 33%" th:text="*{roles[__${iterStat.index}__].permissions[__${iter.index}__].privilegeEntity.description}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div><input type="submit" value="save"/></div>
+    </form>
+</div>
+
+
+<!--<form action="#" th:action="@{/admin/roles/ss}" th:object="${test}" method="post">-->
+    <!--<fieldset>-->
+        <!--<input type="text" th:field="*{name}"/>-->
+        <!--<input type="number" th:field="*{old}"/>-->
+        <!--<button type="submit">¡Doniieeee me!</button>-->
+    <!--</fieldset>-->
+<!--</form>-->
+
+
+<table>
+    <thead>
+    <tr>
+        <th>nazwa</th>
+        <th>permissions</th>
+        <th>opis</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="role : *{roles}">
+        <td th:text="*{role.id}"></td>
+        <td th:text="*{role.name}"></td>
+        <table>
+            <tbody>
+            <tr th:each="permissions : *{role.permissions}">
+                <td th:text="*{permissions.privilegeEntity.name}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>
