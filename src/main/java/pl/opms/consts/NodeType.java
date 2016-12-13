@@ -1,4 +1,4 @@
-package pl.opms.fe.test;
+package pl.opms.consts;
 
 /**
  * Created by Piotr Borczyk on 22.11.2016.

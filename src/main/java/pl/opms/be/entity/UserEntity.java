@@ -2,16 +2,16 @@ package pl.opms.be.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.enterprise.inject.Default;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 @NoArgsConstructor
@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class UserEntity extends BaseEntity {
 
     @Column(name = "username")
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     private String password;

@@ -30,6 +30,10 @@ public class PrivilegeEntity extends BaseEntity {
     private String name;
 
     public PrivilegeEntity(String name) {
+        setName(name);
+    }
+
+    public void setName(String name) {
         this.name = name;
         this.nameRole = "ROLE_" + name.toUpperCase();
     }
