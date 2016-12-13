@@ -30,13 +30,11 @@ public class PatientDataEntity extends BaseEntity {
     @Column (name = "weight")
     private Float weight;
 
-//    @ManyToOne (cascade = CascadeType.ALL)
-//    @JoinColumn (name = "department_id")
-//    private DepartmentEntity department;
+    @ManyToOne (cascade = CascadeType.ALL)
+    private DepartmentEntity department;
 
-//    @ManyToOne (cascade = CascadeType.ALL)
-//    @JoinColumn (name = "room_id")
-//    private RoomEntity room;
+    @ManyToOne (cascade = CascadeType.ALL)
+    private RoomEntity room;
 
     @Column (name = "blood_type")
     @Enumerated

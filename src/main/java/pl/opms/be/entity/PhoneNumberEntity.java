@@ -17,6 +17,9 @@ import javax.persistence.Table;
 @Table(name = "PHONE_NUMBER_TABLE")
 public class PhoneNumberEntity extends BaseEntity {
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "phone_number")
     private String phoneNumber;
 

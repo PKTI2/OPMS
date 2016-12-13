@@ -29,9 +29,9 @@ public class PatientEntity extends UserEntity{
     @OneToOne(cascade = CascadeType.ALL)
     private PatientDataEntity patientData;
 
+    @OneToOne (cascade = {CascadeType.ALL})
+    private PersonalDataEntity personalDataEntity;
+
 //    @Column (name = "patient_history")
 //    private PatientHistoryEntity patientHistory
-
-    @Column (name = "additional_phone_number")
-    private String additionalPhoneNumber;
 }
