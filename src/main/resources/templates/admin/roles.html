@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <!-- Bootstrap -->
+
     <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -46,15 +46,10 @@
                             <tbody>
                             <tr th:each="permission, iter : ${allPrivileges}">
                                 <td style="width: 33%">
-                                    <!--th:text="${permissions.enable}"-->
-                                    <!--<label th:for="${#ids.next('covered')}" th:text="#{seedstarter.covered}">Covered</label>-->
-                                    <!--<input type="checkbox" th:field="*{covered}" />-->
-                                    <!--<label th:for"${#ids.next()}-->
                                     <input type="checkbox" th:value="*{roles[__${iterStat.index}__].hasPermissions[__${iter.index}__]}"
                                            th:checked="*{roles[__${iterStat.index}__].hasPermissions[__${iter.index}__]}"
                                            th:field="*{roles[__${iterStat.index}__].hasPermissions[__${iter.index}__]}"/>
                                 </td>
-                                <!--<td><input type="text" th:field="*{privilegeEntity.name}"/></td>-->
                                 <td style="width: 33%" th:text="${permission.name}"></td>
                                 <td style="width: 33%" th:text="${permission.description}"></td>
                             </tr>
