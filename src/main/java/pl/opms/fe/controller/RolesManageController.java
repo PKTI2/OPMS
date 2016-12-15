@@ -24,12 +24,13 @@ import java.util.NoSuchElementException;
  */
 
 @Controller
-public class RolesController {
+@RequestMapping("/admin/roles/manage")
+public class RolesManageController {
     @Autowired
-    private RoleService roleService;
+    transient private RoleService roleService;
     @Autowired
-    private PrivilegeService privilegeService;
-    private static final Logger logger = Logger.getLogger(RolesController.class);
+    transient private PrivilegeService privilegeService;
+    private static final Logger logger = Logger.getLogger(RolesManageController.class);
 
 
     @ModelAttribute("wrapper")
@@ -44,22 +45,21 @@ public class RolesController {
         return privilegeEntities;
     }
 
-    @RequestMapping("/admin/roles")
+    @RequestMapping("")
     public String showRoles() {
-        return "admin/roles";
+        return "admin/roles/manage";
     }
 
-    @RequestMapping(value = "/admin/roles/save", method = RequestMethod.POST)
+    @RequestMapping(path = "/save", method = RequestMethod.POST)
     public String saveRoles(@ModelAttribute("wrapper") Wrapper wrapper, BindingResult result, ModelMap modelMap) {
-
         try {
             roleService.updateRole(wrapper);
         } catch (NoSuchElementException | PrivilegesOutdatedException e) {
             modelMap.addAttribute("error", true);
             logger.info(e.getMessage());
-            return "admin/roles";
+            return "admin/roles/manage";
         }
 
-        return "redirect:/admin/roles";
+        return "redirect:/admin/roles/manage";
     }
 }

@@ -32,4 +32,9 @@ public class RoleEntity extends BaseEntity {
 
     @ManyToMany
     private Set<PrivilegeEntity> privilegeEntities;
+
+    public RoleEntity(Long id, String name, Set<PrivilegeEntity> privilegeEntities) {
+        this(name, privilegeEntities);
+        this.id = id;
+    }
 }
