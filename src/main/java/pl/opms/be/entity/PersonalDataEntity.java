@@ -35,6 +35,6 @@ public class PersonalDataEntity extends BaseEntity {
     @Column(name = "pesel_number")
     private String peselNumber;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @Column(name = "birth_date")
     private Date birthDate;
 }
