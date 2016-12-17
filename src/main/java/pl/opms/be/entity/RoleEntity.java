@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -27,7 +28,7 @@ import java.util.Set;
 
 @Table(name = "ROLE")
 public class RoleEntity extends BaseEntity {
-    @Column(name = "name")
+    @Column(name = "name", unique = true)
     private String name;
 
     @ManyToMany
@@ -36,5 +37,10 @@ public class RoleEntity extends BaseEntity {
     public RoleEntity(Long id, String name, Set<PrivilegeEntity> privilegeEntities) {
         this(name, privilegeEntities);
         this.id = id;
+    }
+
+    public RoleEntity(String name) {
+        this.name = name;
+        this.privilegeEntities = new HashSet<>();
     }
 }
