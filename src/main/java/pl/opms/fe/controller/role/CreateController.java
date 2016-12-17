@@ -1,5 +1,6 @@
-package pl.opms.fe.controller;
+package pl.opms.fe.controller.role;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,14 +13,13 @@ import pl.opms.be.entity.PrivilegeEntity;
 import pl.opms.be.entity.RoleEntity;
 import pl.opms.be.service.PrivilegeService;
 import pl.opms.be.service.RoleService;
-import pl.opms.utils.role.PrivilegesOutdatedException;
-import pl.opms.utils.role.RoleUtil;
-import pl.opms.utils.role.Wrapper;
+import pl.opms.be.utils.role.PrivilegesOutdatedException;
+import pl.opms.be.utils.role.RoleUtil;
+import pl.opms.be.validator.RoleValidator;
 
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * Created by Dawid on 15.12.2016 at 00:48.
@@ -27,11 +27,14 @@ import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/admin/roles/create")
-public class RolesCreateController {
+public class CreateController {
     @Autowired
     transient private RoleService roleService;
     @Autowired
     transient private PrivilegeService privilegeService;
+    @Autowired
+    transient private RoleValidator roleValidator;
+    private static final Logger logger = Logger.getLogger(ManageController.class);
 
     @ModelAttribute("role")
     public RoleUtil populateRole() {
@@ -52,7 +55,19 @@ public class RolesCreateController {
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
     public String saveRoles(@ModelAttribute("role") RoleUtil roleUtil, BindingResult result, ModelMap modelMap) {
-        System.out.println(roleUtil);
+
+        roleValidator.validate(roleUtil, result);
+        if (result.hasErrors()) {
+            return "admin/roles/create";
+        }
+
+        try {
+            roleService.save(roleUtil.getName(), roleUtil.getCurrentPrivilegeIds());
+        } catch (PrivilegesOutdatedException e) {
+            modelMap.addAttribute("error", true);
+            logger.info(e.getMessage());
+            return "admin/roles/manage";
+        }
         return "redirect:/admin/roles/create";
     }
 }
