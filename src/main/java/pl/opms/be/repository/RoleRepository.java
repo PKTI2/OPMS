@@ -13,5 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface RoleRepository extends CrudRepository<RoleEntity, Long> {
-    public List<RoleEntity> findAll();
+    List<RoleEntity> findAll();
+    List<RoleEntity> findByNameIgnoreCase(String name);
 }

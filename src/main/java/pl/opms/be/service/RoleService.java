@@ -1,15 +1,14 @@
 package pl.opms.be.service;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.opms.be.entity.PrivilegeEntity;
 import pl.opms.be.entity.RoleEntity;
 import pl.opms.be.repository.RoleRepository;
-import pl.opms.utils.role.PrivilegesOutdatedException;
-import pl.opms.utils.role.RoleUtil;
-import pl.opms.utils.role.Wrapper;
+import pl.opms.be.utils.role.PrivilegesOutdatedException;
+import pl.opms.be.utils.role.RoleUtil;
+import pl.opms.be.utils.role.Wrapper;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -34,6 +33,20 @@ public class RoleService {
         return roleRepository.findOne(id);
     }
 
+    public List<RoleEntity> getByName(String name) {
+        return roleRepository.findByNameIgnoreCase(name);
+    }
+
+    public void save(String roleName, List<Long> privilegeIds) throws PrivilegesOutdatedException {
+        RoleEntity roleEntity = new RoleEntity(roleName);
+
+        for (Long id : privilegeIds) {
+            PrivilegeEntity privilegeEntity = privilegeService.get(id);
+            addPrivilegeToRole(privilegeEntity, roleEntity);
+        }
+
+        roleRepository.save(roleEntity);
+    }
 
     public void updateRole(Wrapper wrapper) throws NoSuchElementException, PrivilegesOutdatedException {
         List<RoleUtil> roleUtils = wrapper.getRoles();
@@ -51,13 +64,19 @@ public class RoleService {
 
             for (Long id : ids) {
                 PrivilegeEntity privilegeEntity = privilegeService.get(id);
-                if (privilegeEntity == null) {
-                    throw new PrivilegesOutdatedException("Used privileges are outdated");
-                }
-                roleEntity.getPrivilegeEntities().add(privilegeEntity);
+                addPrivilegeToRole(privilegeEntity, roleEntity);
             }
 
             roleRepository.save(roleEntity);
         }
+    }
+
+    private void addPrivilegeToRole(PrivilegeEntity privilegeEntity, RoleEntity roleEntity)
+            throws PrivilegesOutdatedException {
+
+        if (privilegeEntity == null) {
+            throw new PrivilegesOutdatedException("Used privileges are outdated");
+        }
+        roleEntity.getPrivilegeEntities().add(privilegeEntity);
     }
 }
