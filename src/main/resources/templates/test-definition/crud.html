@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Definicje badań</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Bootstrap -->
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<h2 th:text="#{testdefinition.crud.title}">Definicje badań</h2>
+<div class="container">
+    <form class="navbar-form navbar-right" th:action="@{crud/search}" role="search" th:object="${searchBean}"
+          method="post">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Nazwa" th:placeholder="#{testdefinition.name}" th:field="*{searchTerm}"/>
+            <div class="checkbox">
+                <label for="deprecatedCheckbox" th:text="#{testdefinition.deprecated}">Przestarzały</label>
+                <input id="deprecatedCheckbox" type="checkbox" class="form-control" th:field="*{isDeprecated}"/>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default" th:text="#{testdefinition.search}">Szukaj</button>
+    </form>
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th th:text="#{testdefinition.name}">Nazwa</th>
+            <th th:text="#{testdefinition.deprecated}">Przestarzały</th>
+            <th th:text="#{testdefinition.browse}">Przeglądaj</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="testDefinition : ${testDefinitions}">
+            <td th:text="${testDefinition.name}">Przykładowa nazwa</td>
+            <td th:text="${testDefinition.deprecated}">Przykładowa wartość</td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${not #lists.isEmpty(testDefinitions)}">
+        <ul class="pagination">
+            <li th:class="${pageable.pageNumber eq 0} ? 'disabled' : ''">
+                <a th:if="${not (pageable.pageNumber eq 0)}"
+                   th:href="@{${''}(pageNumber=${pageable.pageNumber - 1},size=${pageable.pageSize})}" th:text="#{testdefinition.previous}">Previous</a>
+                <a th:if="${(pageable.pageNumber eq 0)}"
+                   href="javascript:void(0);" th:text="#{testdefinition.previous}">Previous</a>
+            </li>
+
+            <li th:each="pageNo : ${#numbers.sequence(0, totalPages - 1)}"
+                th:class="${pageable.pageNumber eq pageNo}? 'active' : ''">
+                <a th:if="${pageable.pageNumber  eq pageNo}" href="javascript:void(0);">
+                    <span th:text="${pageNo + 1}"></span>
+                </a>
+                <a th:if="${not (pageable.pageNumber  eq pageNo)}"
+                   th:href="@{${''}(pageNumber=${pageNo},size=${pageable.pageSize})}">
+                    <span th:text="${pageNo + 1}"></span>
+                </a>
+
+            </li>
+            <li th:class="${(pageable.pageNumber + 1) ge totalPages} ? 'disabled' : ''">
+                <a th:if="${not ((pageable.pageNumber + 1) ge totalPages)}"
+                   th:href="@{${''}(pageNumber=${pageable.pageNumber+1},size=${pageable.pageSize})}" th:text="#{testdefinition.next}">Next</a>
+                <a th:if="${((pageable.pageNumber + 1) ge totalPages)}"
+                   href="javascript:void(0);" th:text="#{testdefinition.next}">Next</a>
+            </li>
+        </ul>
+    </div>
+
+    <div th:if="${#lists.isEmpty(testDefinitions)}" th:text="#{testdefinition.noelements}">
+        Nie znaleziono
+    </div>
+</div>
+</body>
+</html>
