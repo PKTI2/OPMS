@@ -1,8 +1,6 @@
-package pl.opms.utils.role;
+package pl.opms.be.utils.role;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import pl.opms.be.entity.BaseEntity;
 import pl.opms.be.entity.PrivilegeEntity;
@@ -10,10 +8,8 @@ import pl.opms.be.entity.RoleEntity;
 
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Set;
 
 /**
  * Created by Dawid on 11.12.2016 at 01:03.

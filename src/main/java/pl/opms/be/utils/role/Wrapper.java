@@ -1,4 +1,4 @@
-package pl.opms.utils.role;
+package pl.opms.be.utils.role;
 
 import lombok.Data;
 import lombok.ToString;

@@ -1,4 +1,4 @@
-package pl.opms.utils.role;
+package pl.opms.be.utils.role;
 
 /**
  * Created by Dawid on 12.12.2016 at 19:49.
