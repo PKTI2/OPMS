@@ -17,6 +17,12 @@
 <body>
 
 <div class="container">
+    <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
+    </span></button>
+        Rola została dodana pomyślnie!
+    </div>
+
     <div class="alert alert-danger alert-dismissible" role="alert" th:if="${error}">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
     </span></button>

@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.opms.be.entity.BaseEntity;
 import pl.opms.be.entity.PrivilegeEntity;
 import pl.opms.be.service.PrivilegeService;
@@ -46,12 +48,16 @@ public class ManageController {
     }
 
     @RequestMapping("")
-    public String showRoles() {
+    public String showRoles(@RequestParam(required = false, defaultValue = "false") Boolean success, ModelMap modelMap) {
+        if(success) {
+            modelMap.addAttribute("success", true);
+        }
         return "admin/roles/manage";
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public String saveRoles(@ModelAttribute("wrapper") Wrapper wrapper, BindingResult result, ModelMap modelMap) {
+    public String saveRoles(@ModelAttribute("wrapper") Wrapper wrapper, BindingResult result, ModelMap modelMap,
+                            RedirectAttributes redirectAttributes) {
         try {
             roleService.updateRole(wrapper);
         } catch (NoSuchElementException | PrivilegesOutdatedException e) {
@@ -60,6 +66,7 @@ public class ManageController {
             return "admin/roles/manage";
         }
 
+        redirectAttributes.addAttribute("success", true);
         return "redirect:/admin/roles/manage";
     }
 }

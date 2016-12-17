@@ -8,6 +8,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.opms.be.entity.BaseEntity;
 import pl.opms.be.entity.PrivilegeEntity;
 import pl.opms.be.entity.RoleEntity;
@@ -49,12 +51,16 @@ public class CreateController {
     }
 
     @RequestMapping("")
-    public String showRoles() {
+    public String showRoles(@RequestParam(required = false, defaultValue = "false") Boolean success, ModelMap modelMap) {
+        if(success) {
+            modelMap.addAttribute("success", true);
+        }
         return "admin/roles/create";
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public String saveRoles(@ModelAttribute("role") RoleUtil roleUtil, BindingResult result, ModelMap modelMap) {
+    public String saveRoles(@ModelAttribute("role") RoleUtil roleUtil, BindingResult result, ModelMap modelMap,
+                            RedirectAttributes redirectAttributes) {
 
         roleValidator.validate(roleUtil, result);
         if (result.hasErrors()) {
@@ -68,6 +74,8 @@ public class CreateController {
             logger.info(e.getMessage());
             return "admin/roles/manage";
         }
+
+        redirectAttributes.addAttribute("success", true);
         return "redirect:/admin/roles/create";
     }
 }
