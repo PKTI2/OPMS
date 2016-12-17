@@ -54,7 +54,7 @@ public class TestDefinitionCrudController {
                              @RequestParam(required = false, defaultValue = "15") Integer size) {
         pageable = new PageRequest(pageNumber, size);
         page = testDefinitionService.requestPage(predicate,pageable);
-        ModelAndView modelView = new ModelAndView("/test-definition/crud/index");
+        ModelAndView modelView = new ModelAndView("/test-definition/crud");
         modelView.addObject("totalPages",page.getTotalPages());
         modelView.addObject("testDefinitions",page.getContent());
         modelView.addObject("pageable",pageable);
