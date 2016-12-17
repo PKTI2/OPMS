@@ -23,6 +23,13 @@
 
 
     <dependencies>
+        <!-- jquery -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
 
         <!--bootsrap-->
         <dependency>

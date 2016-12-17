@@ -5,11 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -27,10 +23,10 @@ public class PersonalDataEntity extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "address")
+    @OneToOne(cascade = CascadeType.ALL)
     private AddressEntity address;
 
-    @Column(name = "mail_address")
+    @OneToOne(cascade = CascadeType.ALL)
     private AddressEntity mailAddress;
 
     @OneToMany(cascade = CascadeType.ALL)
@@ -39,6 +35,6 @@ public class PersonalDataEntity extends BaseEntity {
     @Column(name = "pesel_number")
     private String peselNumber;
 
-    @Column(name = "birth_date")
+    @OneToOne(cascade = CascadeType.ALL)
     private Date birthDate;
 }
