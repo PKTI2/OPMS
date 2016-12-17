@@ -29,12 +29,12 @@ public class PrivilegeEntity extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    public PrivilegeEntity(String name) {
-        setName(name);
-    }
+    @Column(name = "description")
+    private String description;
+
 
     public void setName(String name) {
         this.name = name;
-        this.nameRole = "ROLE_" + name.toUpperCase();
+        this.nameRole = "ROLE_" + name.toUpperCase().replace(' ', '_');
     }
 }
