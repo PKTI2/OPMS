@@ -1,4 +1,4 @@
-package pl.opms.fe.controller;
+package pl.opms.fe.controller.role;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,8 @@ import pl.opms.be.entity.BaseEntity;
 import pl.opms.be.entity.PrivilegeEntity;
 import pl.opms.be.service.PrivilegeService;
 import pl.opms.be.service.RoleService;
-import pl.opms.utils.role.PrivilegesOutdatedException;
-import pl.opms.utils.role.Wrapper;
+import pl.opms.be.utils.role.PrivilegesOutdatedException;
+import pl.opms.be.utils.role.Wrapper;
 
 import java.util.Comparator;
 import java.util.List;
@@ -25,12 +25,12 @@ import java.util.NoSuchElementException;
 
 @Controller
 @RequestMapping("/admin/roles/manage")
-public class RolesManageController {
+public class ManageController {
     @Autowired
     transient private RoleService roleService;
     @Autowired
     transient private PrivilegeService privilegeService;
-    private static final Logger logger = Logger.getLogger(RolesManageController.class);
+    private static final Logger logger = Logger.getLogger(ManageController.class);
 
 
     @ModelAttribute("wrapper")
