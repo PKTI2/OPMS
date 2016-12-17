@@ -1,4 +1,4 @@
-package pl.opms.fe.controller;
+package pl.opms.fe.controller.testdefinition;
 
 import com.querydsl.core.types.Predicate;
 import lombok.Getter;
@@ -24,6 +24,7 @@ import javax.annotation.PostConstruct;
  */
 
 @Controller
+@RequestMapping(value = "/test-definition/crud")
 public class TestDefinitionCrudController {
 
     @Autowired
@@ -48,11 +49,9 @@ public class TestDefinitionCrudController {
         predicate = qTestDefinitionEntity.name.contains("").and(qTestDefinitionEntity.deprecated.isNotNull());
     }
 
-    @RequestMapping(value = "/test-definition/crud", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public ModelAndView crud(@RequestParam(required = false, defaultValue = "0") Integer pageNumber,
                              @RequestParam(required = false, defaultValue = "15") Integer size) {
-        if(pageNumber == null) pageNumber = 0;
-        if(size == null) size = 20;
         pageable = new PageRequest(pageNumber, size);
         page = testDefinitionService.requestPage(predicate,pageable);
         ModelAndView modelView = new ModelAndView("/test-definition/crud/index");
@@ -63,7 +62,7 @@ public class TestDefinitionCrudController {
         return modelView;
     }
 
-    @RequestMapping(value = "/test-definition/crud/search", method = RequestMethod.POST)
+    @RequestMapping(path = "/search", method = RequestMethod.POST)
     public ModelAndView search(@ModelAttribute SearchBean searchBean) {
         QTestDefinitionEntity qTestDefinitionEntity = QTestDefinitionEntity.testDefinitionEntity;
         predicate = qTestDefinitionEntity.name.contains(searchBean.getSearchTerm())
