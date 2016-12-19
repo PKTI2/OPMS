@@ -12,5 +12,6 @@ import pl.opms.be.entity.TestDefinitionEntity;
 @Repository
 public interface TestDefinitionRepository extends PagingAndSortingRepository<TestDefinitionEntity, Long>,
         QueryDslPredicateExecutor<TestDefinitionEntity> {
+    Long countByName(String name);
 
 }

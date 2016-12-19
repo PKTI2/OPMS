@@ -25,4 +25,12 @@ public class TestDefinitionService {
     public Page<TestDefinitionEntity> requestPage(Predicate predicate, Pageable pageRequest) {
         return testDefinitionRepository.findAll(predicate,pageRequest);
     }
+
+    public void save(TestDefinitionEntity testDefinitionEntity) {
+        testDefinitionRepository.save(testDefinitionEntity);
+    }
+
+    public Long countByName(String name) {
+        return testDefinitionRepository.countByName(name);
+    }
 }
