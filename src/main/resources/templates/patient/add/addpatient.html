@@ -13,45 +13,54 @@
 <h1>Dodaj pacjenta</h1><br/>
 
 <div class="form">
-    <form th:action="@{add/addPatient}" th:object="${patientEntity}" method="post" class="addpatient-form">
+    <form th:action="@{/patient/add/addPatient}" th:object="${patient}" method="post" class="addpatient-form">
         <h4>Dane:</h4>
-        <div th:object="${personalData}">
-            <div><label> Imie: <input type="text" th:field="${personalDataEntity.firstname}"/> </label></div>
-            <div><label> Nazwisko: <input type="text" th:field="${lastname}"/> </label></div>
-            <div><label> Data urodzenia: <input type="datetime" th:field="${birthdate}"/> </label></div>
-            <div><label> Numer PESEL: <input type="text" th:field="${peselnumber}"/> </label></div>
+        <div th:object="${patient.personalDataEntity}">
+            <div><label> Imie: <input type="text" th:field="*{firstName}"/> </label></div>
+            <div><label> Nazwisko: <input type="text" th:field="*{lastName}"/> </label></div>
+            <div><label> Data urodzenia: <input type="datetime" th:field="*{birthDate}"/> </label></div>
+            <div><label> Numer PESEL: <input type="text" th:field="*{peselNumber}"/> </label></div>
         </div>
-        <div><label> Waga: <input type="text" name="weight"/> </label></div>
-        <div><label> Wzrost: <input type="text" name="height"/> </label></div>
-        <div><label> Grupa krwi: <select name="bloodtype">
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="AB">AB</option>
-            <option value="ZERO">ZERO</option>
-        </select>
-            <select name="bloodantigen">
-                <option value="rhp">RH+</option>
-                <option value="rhm">RH-</option>
-            </select> </label></div>
-        <div><label> Płeć: <select name="gender">
-            <option value="man">Mężczyzna</option>
-            <option value="woman">Kobieta</option>
-        </select></label></div>
+        <div th:object="${patient.patientData}">
+            <div><label> Waga: <input type="text" th:field="*{weight}"/> </label></div>
+            <div><label> Wzrost: <input type="text" th:field="*{height}"/> </label></div>
+            <div><label> Grupa krwi: <select th:field="*{bloodType}">
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="AB">AB</option>
+                <option value="ZERO">ZERO</option>
+            </select>
+                <select th:field="*{bloodAntigen}">
+                    <option value="true">RH+</option>
+                    <option value="false">RH-</option>
+                </select> </label></div>
+            <div><label> Płeć: <select th:field="*{gender}">
+                <option value="MALE">Mężczyzna</option>
+                <option value="FEMALE">Kobieta</option>
+            </select></label></div>
+        </div>
         <div><label> Numer telefonu: <input type="text" name="phonenumber"/> </label></div>
         <h4>Adres: </h4>
-        <div><label> Kraj pochodzenia: <input type="text" name="country"/> </label></div>
-        <div><label> Miasto: <input type="text" name="city"/> </label></div>
-        <div><label> Kod pocztowy: <input type="text" name="postalcode"/> </label></div>
-        <div><label> Ulica: <input type="text" name="street"/> </label></div>
+        <div th:object="${patient.personalDataEntity.address}">
+            <div><label> Kraj pochodzenia: <input type="text" th:field="*{country}"/> </label></div>
+            <div><label> Miasto: <input type="text" th:field="*{city}"/> </label></div>
+            <div><label> Kod pocztowy: <input type="text" th:field="*{postalCode}"/> </label></div>
+            <div><label> Ulica: <input type="text" th:field="*{street}"/> </label></div>
+        </div>
         <h4>Adres do korespondencji: </h4>
-        <div><label> Kraj pochodzenia: <input type="text" name="country"/> </label></div>
-        <div><label> Miasto: <input type="text" name="city"/> </label></div>
-        <div><label> Kod pocztowy: <input type="text" name="postalcode"/> </label></div>
-        <div><label> Ulica: <input type="text" name="street"/> </label></div>
+        <div th:object="${patient.personalDataEntity.mailAddress}">
+            <div><label> Kraj pochodzenia: <input type="text" th:field="*{country}"/> </label></div>
+            <div><label> Miasto: <input type="text" th:field="*{city}"/> </label></div>
+            <div><label> Kod pocztowy: <input type="text" th:field="*{postalCode}"/> </label></div>
+            <div><label> Ulica: <input type="text" th:field="*{street}"/> </label></div>
+        </div>
         <h4>Przyjęcie: </h4>
-        <div><label> Oddział: <input type="text" name="department"/> </label></div>
-        <div><label> Numer pokoju: <input type="text" name="roomnumber"/> </label></div>
+        <div th:object="${patient.patientData}">
+            <div><label> Oddział: <input type="text" th:field="*{department.departmentName}"/> </label></div>
+            <div><label> Numer pokoju: <input type="text" th:field="*{room.roomNumber}"/> </label></div>
+        </div>
         <div><input type="submit" value="Dodaj pacjenta"/></div>
+
     </form>
 </div>
 
