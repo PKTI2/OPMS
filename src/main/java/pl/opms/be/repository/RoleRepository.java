@@ -2,9 +2,7 @@ package pl.opms.be.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import pl.opms.be.entity.PatientEntity;
 import pl.opms.be.entity.RoleEntity;
-import pl.opms.be.entity.UserEntity;
 
 import java.util.List;
 
@@ -14,5 +12,6 @@ import java.util.List;
 @Repository
 public interface RoleRepository extends CrudRepository<RoleEntity, Long> {
     List<RoleEntity> findAll();
+
     List<RoleEntity> findByNameIgnoreCase(String name);
 }

@@ -51,7 +51,7 @@ public class CreateController {
     }
 
     @RequestMapping("")
-    public String showRoles(@RequestParam(required = false, defaultValue = "false") Boolean success, ModelMap modelMap) {
+    public String show(@RequestParam(required = false, defaultValue = "false") Boolean success, ModelMap modelMap) {
         if(success) {
             modelMap.addAttribute("success", true);
         }
