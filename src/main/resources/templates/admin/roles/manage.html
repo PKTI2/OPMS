@@ -15,6 +15,7 @@
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+
 <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
     </span></button>
@@ -29,6 +30,7 @@
 </div>
 
 <div class="container">
+    <div th:replace="fragments/header :: header">...</div>
     <form th:action="@{/admin/roles/manage/save}" th:object="${wrapper}" method="post">
         <div class="panel-group" id="accordion">
             <div class="panel panel-default" th:each="role, iterStat : *{roles}">

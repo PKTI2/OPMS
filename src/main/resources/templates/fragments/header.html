@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Bootstrap -->
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse" th:fragment="header">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">OPMS</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#" th:href="@{/}">Panel Startowy</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Role
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" th:href="@{/admin/roles/create}">Stwórz</a></li>
+                    <li><a href="#" th:href="@{/admin/roles/manage}">Zarządzaj</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Badania
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" th:href="@{/test-definition/add}">Dodaj</a></li>
+                    <li><a href="#" th:href="@{/test-definition/crud}">Szukaj</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pacjent
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" th:href="@{/patient/add}">Dodaj</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span sec:authentication="name"></span>
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profil</a></li>
+                    <li> <a href="/logout" th:href="@{#}" onclick="$('#logoutForm').submit();">Wyloguj</a></li>
+                    <form style="visibility: hidden" id="logoutForm" method="post" action="#" th:action="@{/logout}"></form>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+</body>
+</html>

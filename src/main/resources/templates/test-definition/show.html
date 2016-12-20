@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Bootstrap -->
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+
+    <div th:replace="fragments/header :: header">...</div>
+
+    <th:block th:object="${testDefinitionEntity}">
+        <div class="row">
+            <div class="col-md-5">
+                Nazwa
+            </div>
+            <div class="col-md-5" th:text="*{name}">
+                Przykład
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-5">
+                Przestarzały
+            </div>
+            <div class="col-md-5" th:text="*{deprecated}">
+                Przykład
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nazwa pola</th>
+                <th>Typ pola</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="node : *{nodeEntities}">
+                <td th:text="${node.label}"></td>
+                <td th:text="#{${node.nodeType.displayName}}"></td>
+
+            </tr>
+            </tbody>
+        </table>
+    </th:block>
+</div>
+</body>
+</html>

@@ -8,11 +8,16 @@
     <!-- Bootstrap -->
     <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h2 th:text="#{testdefinition.crud.title}">Definicje badań</h2>
 <div class="container">
-    <form class="navbar-form navbar-right" th:action="@{crud/search}" role="search" th:object="${searchBean}"
+    <div th:replace="fragments/header :: header">...</div>
+
+    <h2 th:text="#{testdefinition.crud.title}">Definicje badań</h2>
+
+    <form class="navbar-form navbar-right" th:action="@{/test-definition/crud/search}" role="search" th:object="${searchBean}"
           method="post">
         <div class="form-group">
             <input type="text" class="form-control" placeholder="Nazwa" th:placeholder="#{testdefinition.name}" th:field="*{searchTerm}"/>
@@ -26,22 +31,30 @@
 </div>
 
 <div class="container">
-    <table class="table">
-        <thead>
-        <tr>
-            <th th:text="#{testdefinition.name}">Nazwa</th>
-            <th th:text="#{testdefinition.deprecated}">Przestarzały</th>
-            <th th:text="#{testdefinition.browse}">Przeglądaj</th>
-        </tr>
-        </thead>
-        <tbody>
+    <form class="form-inline" th:action="@{/test-definition/crud/table}" method="post">
+        <table class="table">
+            <thead>
+            <tr>
+                <th th:text="#{testdefinition.name}">Nazwa</th>
+                <th th:text="#{testdefinition.deprecated}">Przestarzały</th>
+                <th th:text="#{actions}">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
 
-        <tr th:each="testDefinition : ${testDefinitions}">
-            <td th:text="${testDefinition.name}">Przykładowa nazwa</td>
-            <td th:text="${testDefinition.deprecated}">Przykładowa wartość</td>
-        </tr>
-        </tbody>
-    </table>
+            <tr th:each="testDefinition, iter : ${testDefinitions}">
+                <td th:text="${testDefinition.name}">Przykładowa nazwa</td>
+                <td th:text="${testDefinition.deprecated}">Przykładowa wartość</td>
+                <td>
+                    <button type="submit" class="btn btn-default" name="rowIndex" th:value="${iter.index}">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        <th:block th:text="#{browse}">Przeglądaj Przykład</th:block>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
     <div th:if="${not #lists.isEmpty(testDefinitions)}">
         <ul class="pagination">
             <li th:class="${pageable.pageNumber eq 0} ? 'disabled' : ''">
