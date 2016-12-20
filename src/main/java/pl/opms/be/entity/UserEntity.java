@@ -8,7 +8,10 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @EqualsAndHashCode(callSuper = false)
@@ -17,6 +20,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "USER_TABLE")
+@Inheritance( strategy = InheritanceType.JOINED )
 public class UserEntity extends BaseEntity {
 
     @Column(name = "username")
@@ -26,12 +30,12 @@ public class UserEntity extends BaseEntity {
     private String password;
 
     @Column(name = "enabled")
-    private boolean enabled = false;
+    private boolean enabled = true;
 
     @OneToOne(cascade = CascadeType.MERGE)
     private RoleEntity roleEntity;
 
     @OneToOne(cascade = {CascadeType.ALL})
-    private PersonalDataEntity personalDataEntity;
+    private PersonalDataEntity personalDataEntity = new PersonalDataEntity();
 
 }
