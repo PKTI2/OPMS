@@ -23,9 +23,6 @@ public class PhoneNumberEntity extends BaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "description")
-    private String description;
-
     public PhoneNumberEntity(Long id) {
         this.id = id;
     }

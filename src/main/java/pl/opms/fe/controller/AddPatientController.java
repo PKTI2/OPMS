@@ -47,7 +47,7 @@ public class AddPatientController {
 
     @ModelAttribute("patient")
     public PatientEntity populatePatient() {
-        return new PatientEntity(new PatientDataEntity(0, BloodType.A,true,(float)0.0,Gender.MALE,new DepartmentEntity(new ArrayList<RoomEntity>()," "),new RoomEntity()),new PersonalDataEntity(" "," ", new AddressEntity(" "," "," "," "),new AddressEntity(" "," "," "," "),new ArrayList<PhoneNumberEntity>()," ",new Date()));
+        return new PatientEntity();
 //        return new PatientEntity();
     }
 
@@ -64,7 +64,7 @@ public class AddPatientController {
         this.patientEntity = patientEntity;
         this.patientEntity.getPatientData().setBloodAntigen(true);
         this.patientEntity.getPatientData().setGender(Gender.MALE);
-        this.patientEntity.getPersonalDataEntity().getPhoneNumberList().add(new PhoneNumberEntity("kom","123-456-789"));
+        this.patientEntity.getPersonalDataEntity().getPhoneNumbers().add(new PhoneNumberEntity("kom","123-456-789"));
 
         /*patientEntity = new PatientEntity();
         patientDataEntity = new PatientDataEntity();
