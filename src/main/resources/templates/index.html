@@ -17,10 +17,15 @@
 <div class="container">
     <div th:replace="fragments/header :: header">...</div>
 
-    <h1>Witaj</h1>
-        <h2><span sec:authentication="name"></span></h2>
+    <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
+    </span></button>
+        Hasło zostało zmienione pomyślnie!
+    </div>
 
-        <h3>Używaj linków u góry ekranu.</h3>
+    <h1>Witaj</h1>
+    <h2><span sec:authentication="name"></span></h2>
+
 </div>
 </body>
 </html>
