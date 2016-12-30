@@ -37,10 +37,6 @@ public class NodeInstanceEntity extends BaseEntity{
     @Column(name = "double_value")
     private Double doubleValue;
 
-//    @Column(name = "file_value")
-//    @Lob
-//    private UploadedFile fileValue;
-
     @Column(name = "boolean_value")
     private Boolean booleanValue;
 

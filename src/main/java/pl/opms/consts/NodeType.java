@@ -7,9 +7,7 @@ public enum NodeType {
     STRING("nodetype.string"),
     INT("nodetype.int"),
     DOUBLE("nodetype.double"),
-    COMBO_BOX("nodetype.combobox"),
-    BOOL_CHECK_BOX("nodetype.bool"),
-    FILE("nodetype.file");
+    BOOL_CHECK_BOX("nodetype.bool");
 
     private String displayName;
 

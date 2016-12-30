@@ -8,9 +8,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import java.util.List;
 
 /**
  * Created by Val on 2016-11-24.
@@ -32,6 +34,6 @@ public class PatientEntity extends UserEntity{
     @OneToOne (cascade = {CascadeType.ALL})
     private PersonalDataEntity personalDataEntity;
 
-//    @Column (name = "patient_history")
-//    private PatientHistoryEntity patientHistory
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<TestInstanceEntity> tests;
 }
