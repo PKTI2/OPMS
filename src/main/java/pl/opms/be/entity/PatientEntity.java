@@ -5,12 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by Val on 2016-11-24.
@@ -29,9 +24,6 @@ public class PatientEntity extends UserEntity{
     @OneToOne(cascade = CascadeType.ALL)
     private PatientDataEntity patientData;
 
-    @OneToOne (cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL})
     private PersonalDataEntity personalDataEntity;
-
-//    @Column (name = "patient_history")
-//    private PatientHistoryEntity patientHistory
 }
