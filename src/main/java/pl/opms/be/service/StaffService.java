@@ -23,4 +23,8 @@ public class StaffService {
         staffEntity.setPassword(passwordEncoder.encode(staffEntity.getPassword()));
         staffRepository.save(staffEntity);
     }
+
+    public StaffEntity getByUsername(String username) {
+        return staffRepository.findByUsername(username);
+    }
 }
