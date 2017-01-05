@@ -107,28 +107,11 @@
             </div>
         </div>
 
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default" >
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <div onclick="$('.collapse').collapse()" class="checkbox">
-                            <label data-toggle="collapse" data-target="#collapseTestAdd">
-                                Zrób badanie
-                            </label>
-                        </div>
-                    </h4>
-                </div>
-
-                <div th:id="'collapseTestAdd'" class="panel-collapse collapse">
-                    <div class="panel-body">
-
-                        miejsce na formulaż dodawania badania
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
+        <a class="btn btn-default"
+           th:href="@{${'/test-definition/crud'}(patientId=${patientEntity.id})}">
+            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+            <th:block th:text="#{test.add}">Dodaj</th:block>
+        </a>
 
     </th:block>
 

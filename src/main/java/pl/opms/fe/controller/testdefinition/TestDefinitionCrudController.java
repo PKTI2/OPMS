@@ -55,7 +55,8 @@ public class TestDefinitionCrudController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public ModelAndView crud(@RequestParam(required = false, defaultValue = "0") Integer pageNumber,
-                             @RequestParam(required = false, defaultValue = "10") Integer size) {
+                             @RequestParam(required = false, defaultValue = "10") Integer size,
+                             @RequestParam(required = false) Long patientId) {
         pageable = new PageRequest(pageNumber, size);
         page = testDefinitionService.requestPage(predicate,pageable);
         ModelAndView modelView = new ModelAndView("/test-definition/crud");
@@ -63,6 +64,7 @@ public class TestDefinitionCrudController {
         modelView.addObject("testDefinitions",page.getContent());
         modelView.addObject("pageable",pageable);
         modelView.addObject("searchBean",searchBean);
+        if(patientId != null) modelView.addObject("patientId",patientId);
         return modelView;
     }
 
