@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.List;
+import javax.persistence.*;
 
 /**
  * Created by Val on 2016-11-24.
@@ -31,7 +32,7 @@ public class PatientEntity extends UserEntity{
     @OneToOne(cascade = CascadeType.ALL)
     private PatientDataEntity patientData;
 
-    @OneToOne (cascade = {CascadeType.ALL})
+    @OneToOne(cascade = {CascadeType.ALL})
     private PersonalDataEntity personalDataEntity;
 
     @OneToMany

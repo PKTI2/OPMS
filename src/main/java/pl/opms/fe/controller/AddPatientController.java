@@ -2,25 +2,15 @@ package pl.opms.fe.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.opms.be.entity.*;
-import pl.opms.be.service.AddPatientService;
-import pl.opms.be.utils.role.PrivilegesOutdatedException;
-import pl.opms.be.utils.role.RoleUtil;
-import pl.opms.consts.BloodType;
-import pl.opms.consts.Gender;
+import pl.opms.be.entity.PatientEntity;
+import pl.opms.be.service.PatientService;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by Val on 2016-12-13.
@@ -29,14 +19,10 @@ import java.util.List;
 public class AddPatientController {
 
     @Autowired
-    private AddPatientService addPatientService;
+    private PatientService patientService;
 
     private PatientEntity patientEntity;
-    private PatientDataEntity patientDataEntity;
-    private PersonalDataEntity personalDataEntity;
-    private AddressEntity addressEntity;
-    private DepartmentEntity departmentEntity;
-    private RoomEntity roomEntity;
+
 
 
     @PostConstruct
@@ -47,8 +33,7 @@ public class AddPatientController {
 
     @ModelAttribute("patient")
     public PatientEntity populatePatient() {
-        return new PatientEntity();
-//        return new PatientEntity();
+        return new PatientEntity();//(new UserEntity(patientEntity.getPersonalDataEntity().getPeselNumber(),"123",true, ,patientEntity.getPersonalDataEntity()));
     }
 
     @RequestMapping(value = "/patient/add", method = RequestMethod.GET)
@@ -58,19 +43,10 @@ public class AddPatientController {
     }
 
     @RequestMapping(value = "/patient/add/addPatient", method = RequestMethod.POST)
-    public ModelAndView addPatient(@ModelAttribute("patient") PatientEntity patientEntity, BindingResult result, ModelMap modelMap,
-                                   RedirectAttributes redirectAttributes) {
+    public ModelAndView addPatient(@ModelAttribute("patient") PatientEntity patientEntity, BindingResult result) {
         System.out.println("test");
-        this.patientEntity = patientEntity;
-        this.patientEntity.getPatientData().setBloodAntigen(true);
-        this.patientEntity.getPatientData().setGender(Gender.MALE);
-        this.patientEntity.getPersonalDataEntity().getPhoneNumbers().add(new PhoneNumberEntity("kom","123-456-789"));
-
-        /*patientEntity = new PatientEntity();
-        patientDataEntity = new PatientDataEntity();
-        personalDataEntity = new PersonalDataEntity();
-        addressEntity = new AddressEntity();*/
-
+        System.out.println(patientEntity);
+        patientService.save(patientEntity);
 
         ModelAndView modelAndView = new ModelAndView("redirect:/patient/add");
         return modelAndView;

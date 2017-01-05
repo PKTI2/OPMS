@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import java.util.Collection;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -22,6 +25,8 @@ import javax.persistence.Table;
 @Table(name = "USER_TABLE")
 @Inheritance( strategy = InheritanceType.JOINED )
 public class UserEntity extends BaseEntity {
+    @Column(name = "password_expired")
+    private Boolean passwordExpired = true;
 
     @Column(name = "username")
     private String username;
@@ -37,5 +42,4 @@ public class UserEntity extends BaseEntity {
 
     @OneToOne(cascade = {CascadeType.ALL})
     private PersonalDataEntity personalDataEntity = new PersonalDataEntity();
-
 }

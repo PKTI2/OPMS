@@ -9,4 +9,5 @@ import pl.opms.be.entity.StaffEntity;
  */
 @Repository
 public interface StaffRepository extends CrudRepository<StaffEntity, Long>{
+    StaffEntity findByUsername(String username);
 }

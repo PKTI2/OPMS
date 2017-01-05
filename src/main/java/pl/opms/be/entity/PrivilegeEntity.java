@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 
 @Table(name = "PRIVILEGE_ENTITY")
-public class PrivilegeEntity extends BaseEntity {
+public class PrivilegeEntity extends BaseEntity implements GrantedAuthority {
     @Column(name = "name_role")
     private String nameRole;
 
@@ -36,5 +37,10 @@ public class PrivilegeEntity extends BaseEntity {
     public void setName(String name) {
         this.name = name;
         this.nameRole = "ROLE_" + name.toUpperCase().replace(' ', '_');
+    }
+
+    @Override
+    public String getAuthority() {
+        return nameRole;
     }
 }
