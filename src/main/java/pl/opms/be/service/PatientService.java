@@ -34,4 +34,8 @@ public class PatientService {
         patientRepository.save(patientEntity);
     }
 
+    public PatientEntity findOne(Long patientId) {
+        return patientRepository.findOne(patientId);
+}
+
 }

@@ -35,6 +35,6 @@ public class PatientEntity extends UserEntity{
     @OneToOne(cascade = {CascadeType.ALL})
     private PersonalDataEntity personalDataEntity;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     private List<TestInstanceEntity> tests;
 }
