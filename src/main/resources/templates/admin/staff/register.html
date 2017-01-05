@@ -174,7 +174,7 @@
                         <h4 class="panel-title">
 
 
-                            <div onclick="$('.collapse').collapse()" class="checkbox">
+                            <div id="address-collapse" onclick="$('.collapse').collapse()" class="checkbox">
                                 <label data-toggle="collapse" data-target="#collapseOne">
                                     <input  type="checkbox" th:value="*{personalDataEntity.isMailAddress}"
                                             th:checked="*{personalDataEntity.isMailAddress}"
@@ -304,9 +304,13 @@
         </fieldset>
         <input type="submit" value="save"/>
     </form>
-<script>
+    <script th:inline="javascript">
+        var test = [[${staff.personalDataEntity.isMailAddress}]];
 
-</script>
+        if(test === true) {
+            $('.collapse').collapse();
+        }
+    </script>
 </div>
 </body>
 </html>
