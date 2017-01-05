@@ -19,4 +19,10 @@ public class StaffController {
         }
         return "staff/profile";
     }
+
+
+    @RequestMapping(path = "/showData")
+    public String showData() {
+        return "staff/showData";
+    }
 }
