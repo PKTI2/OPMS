@@ -31,6 +31,9 @@
         Błąd zapisu!
     </div>
 
+    <h5>Pacjent</h5>
+    <h3 th:text="${patientName}"></h3>
+
     <form th:object="${newInstance}" th:action="@{/test-instance/add}" method="post">
         <fieldset>
             <div class="row">

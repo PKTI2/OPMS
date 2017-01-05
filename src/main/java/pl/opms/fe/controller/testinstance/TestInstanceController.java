@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.opms.be.entity.PatientEntity;
 import pl.opms.be.entity.TestDefinitionEntity;
 import pl.opms.be.entity.TestInstanceEntity;
+import pl.opms.be.service.PatientService;
 import pl.opms.be.service.TestDefinitionService;
 import pl.opms.be.service.TestInstanceService;
 import pl.opms.be.validator.TestInstanceValidator;
@@ -33,9 +35,14 @@ public class TestInstanceController {
     private TestDefinitionService testDefinitionService;
 
     @Autowired
+    private PatientService patientService;
+
+    @Autowired
     private TestInstanceValidator testInstanceValidator;
 
     private static final Logger logger = Logger.getLogger(TestInstanceController.class);
+
+    private PatientEntity patientEntity;
 
     @RequestMapping(path = "/display")
     public String display(@RequestParam(required = true) Long id,
@@ -50,10 +57,14 @@ public class TestInstanceController {
 
     @RequestMapping(path = "/add")
     public String add(@RequestParam(required = true) Long definitionId,
+                      @RequestParam(required = true) Long patientId,
                       ModelMap modelMap) {
+        patientEntity = patientService.findOne(patientId);
         TestDefinitionEntity testDefinitionEntity = testDefinitionService.findOne(definitionId);
         TestInstanceEntity newInstance = new TestInstanceEntity(testDefinitionEntity);
         modelMap.addAttribute("newInstance",newInstance);
+        modelMap.addAttribute("patientName",patientEntity.getPersonalDataEntity().getFirstName() +
+                " " + patientEntity.getPersonalDataEntity().getLastName());
         return "/test-instance/add";
     }
 
@@ -66,7 +77,9 @@ public class TestInstanceController {
             return "test-instance/add";
         }
         try {
+            patientEntity.getTests().add(newInstance);
             testInstanceService.save(newInstance);
+            patientService.save(patientEntity);
             return "redirect:/test-instance/add/success";
         }catch (Exception e) {
             modelMap.addAttribute("error", true);
