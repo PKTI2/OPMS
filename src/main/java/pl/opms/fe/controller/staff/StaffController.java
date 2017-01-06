@@ -28,9 +28,12 @@ public class StaffController {
 
 
     @RequestMapping(path = "/showData")
-    public String showData(ModelMap modelMap) {
+    public String showData(@RequestParam(required = false, defaultValue = "false") Boolean success, ModelMap modelMap) {
         StaffEntity staffEntity = staffService.getByUsername(SecurityContextHolder.getContext().getAuthentication()
                 .getName());
+        if (success) {
+            modelMap.addAttribute("success", true);
+        }
         modelMap.addAttribute("staff", staffEntity);
         return "staff/showData";
     }
