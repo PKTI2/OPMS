@@ -80,7 +80,6 @@ public class RegisterController {
         if (result.hasErrors()) {
             System.out.println(result.getFieldErrors());
             return "admin/staff/register";
-            //TODO walidacja czy staff juz istnieje
         }
 
 
