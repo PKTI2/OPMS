@@ -15,7 +15,8 @@
 <div class="container">
     <div th:replace="fragments/header :: header">...</div>
 
-    <h2 th:text="#{testdefinition.crud.title}">Definicje badań</h2>
+
+    <h3 th:text="${patientId}? #{test.add} : #{testdefinition.crud.title}">Definicje badań</h3>
 
     <form class="navbar-form navbar-right" th:action="@{/test-definition/crud/search}" role="search" th:object="${searchBean}"
           method="post">
@@ -50,6 +51,12 @@
                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                         <th:block th:text="#{browse}">Przeglądaj Przykład</th:block>
                     </button>
+
+                    <a th:if="${patientId}" class="btn btn-default"
+                       th:href="@{${'/test-instance/add'}(definitionId=${testDefinition.id},patientId=${patientId})}">
+                        <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                        <th:block th:text="#{test.add}">Dodaj</th:block>
+                    </a>
                 </td>
             </tr>
             </tbody>
