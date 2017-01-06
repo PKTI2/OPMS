@@ -18,13 +18,19 @@ public class StaffService {
     private BCryptPasswordEncoder passwordEncoder;
 
     public void save(StaffEntity staffEntity) {
-        System.out.println(passwordEncoder.encode(staffEntity.getPassword()));
-        System.out.println(staffEntity.getPassword());
         staffEntity.setPassword(passwordEncoder.encode(staffEntity.getPassword()));
         staffRepository.save(staffEntity);
     }
 
     public StaffEntity getByUsername(String username) {
         return staffRepository.findByUsername(username);
+    }
+
+    public boolean isUsernameFree(String username) {
+        return staffRepository.findByUsername(username) == null;
+    }
+
+    public void update(StaffEntity staffEntity) {
+        staffRepository.save(staffEntity);
     }
 }
