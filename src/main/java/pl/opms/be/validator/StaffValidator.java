@@ -8,6 +8,7 @@ import pl.opms.be.entity.StaffEntity;
 import pl.opms.be.service.StaffService;
 
 import static org.springframework.validation.ValidationUtils.rejectIfEmpty;
+import static org.springframework.validation.ValidationUtils.rejectIfEmptyOrWhitespace;
 
 /**
  * Created by Dawid on 17.12.2016 at 17:15.
@@ -17,6 +18,8 @@ import static org.springframework.validation.ValidationUtils.rejectIfEmpty;
 public class StaffValidator implements Validator {
     @Autowired
     private StaffService staffService;
+    @Autowired
+    private BasicStaffValidator basicStaffValidator;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -26,23 +29,14 @@ public class StaffValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         StaffEntity staffEntity = (StaffEntity) o;
-        rejectIfEmpty(errors, "personalDataEntity.firstName", "registration.form.empty");
-        rejectIfEmpty(errors, "personalDataEntity.lastName", "registration.form.empty");
-        rejectIfEmpty(errors, "personalDataEntity.peselNumber", "registration.form.empty");
-        rejectIfEmpty(errors, "personalDataEntity.birthDate", "registration.form.empty");
-        rejectIfEmpty(errors, "personalDataEntity.address.street", "registration.form.empty");
-        rejectIfEmpty(errors, "personalDataEntity.address.city", "registration.form.empty");
-        rejectIfEmpty(errors, "personalDataEntity.address.country", "registration.form.empty");
-        rejectIfEmpty(errors, "personalDataEntity.address.postalCode", "registration.form.empty");
-        rejectIfEmpty(errors, "medicalTitle", "registration.form.empty");
-        rejectIfEmpty(errors, "username", "registration.form.empty");
+        basicStaffValidator.validate(staffEntity, errors);
+        rejectIfEmptyOrWhitespace(errors, "medicalTitle", "registration.form.empty");
+        rejectIfEmptyOrWhitespace(errors, "username", "registration.form.empty");
 
-        if(staffEntity.getPersonalDataEntity().getIsMailAddress()) {
-            rejectIfEmpty(errors, "personalDataEntity.mailAddress.street", "registration.form.empty");
-            rejectIfEmpty(errors, "personalDataEntity.mailAddress.city", "registration.form.empty");
-            rejectIfEmpty(errors, "personalDataEntity.mailAddress.country", "registration.form.empty");
-            rejectIfEmpty(errors, "personalDataEntity.mailAddress.postalCode", "registration.form.empty");
-
+        if (!staffEntity.getUsername().equals("")) {
+            if (!staffService.isUsernameFree(staffEntity.getUsername())) {
+                errors.rejectValue("username","registration.form.username.busy");
+            }
         }
     }
 }

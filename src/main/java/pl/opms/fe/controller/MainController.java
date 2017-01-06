@@ -40,7 +40,7 @@ public class MainController {
     @RequestMapping("/profile")
     public String redirectToProfile() {
         if (staffService.getByUsername(SecurityContextHolder.getContext().getAuthentication().getName()) != null) {
-            return "redirect:/staff/profile";
+            return "redirect:/staff/showData";
         }
         return "index";
     }
