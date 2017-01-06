@@ -18,14 +18,139 @@
 <div class="container">
     <div th:replace="fragments/header :: header">...</div>
 
-    <div class="alert alert-danger alert-dismissible" role="alert" th:if="${error}">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
-    </span></button>
-        <span class="sr-only">Error:</span>
-        Brak połączenia z bazą danych!
-    </div>
 
     <div th:replace="fragments/submenu :: submenu">...</div>
+
+
+    <div th:object="${staff}">
+        <div class="row">
+            <label for="firstname" class="col-lg-3 control-label"
+                   th:text="#{registration.form.firstName}"></label>
+            <div class="col-lg-5">
+                <label id="firstname" th:text="*{personalDataEntity.firstName}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="lastname" class="col-lg-3 control-label"
+                   th:text="#{registration.form.lastName}"></label>
+            <div class="col-lg-5">
+                <label id="lastname" th:text="*{personalDataEntity.lastName}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="medicalTitle" class="col-lg-3 control-label"
+                   th:text="#{registration.form.medicalTitle}"></label>
+            <div class="col-lg-5">
+                <label id="medicalTitle" th:text="*{medicalTitle}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="pesel" class="col-lg-3 control-label"
+                   th:text="#{registration.form.peselNumber}"></label>
+            <div class="col-lg-5">
+                <label id="pesel" th:text="*{personalDataEntity.peselNumber}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="birthDate" class="col-lg-3 control-label"
+                   th:text="#{registration.form.birthDate}"></label>
+            <div class="col-lg-5">
+                <label id="birthDate" th:text="*{personalDataEntity.birthDate}"></label>
+            </div>
+        </div>
+
+        <table class="table table-striped" th:unless="${#lists.isEmpty(staff.personalDataEntity.phoneNumbers)}">
+            <tr>
+                <th class="col-sm-1"></th>
+                <th class="col-sm-1">Rodzaj kontaktu</th>
+                <th class="col-sm-1">numer</th>
+            </tr>
+            <tr th:each="contactPhone, rowStat : *{personalDataEntity.phoneNumbers}">
+                <td></td>
+                <td><label th:text="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].description}"></label></td>
+                <td><label th:text="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].phoneNumber}"></label></td>
+            </tr>
+        </table>
+
+        <p>Adres zameldowania</p>
+
+        <div class="row">
+            <label for="legalAddressCountry" class="col-lg-3 control-label"
+                   th:text="#{registration.form.address.country}"></label>
+            <div class="col-lg-5">
+                <label id="legalAddressCountry" th:text="*{personalDataEntity.address.country}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="legalAddressCity" class="col-lg-3 control-label"
+                   th:text="#{registration.form.address.city}"></label>
+            <div class="col-lg-5">
+                <label id="legalAddressCity" th:text="*{personalDataEntity.address.city}"></label>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <label for="legalAddressStreet" class="col-lg-3 control-label"
+                   th:text="#{registration.form.address.street}"></label>
+            <div class="col-lg-5">
+                <label id="legalAddressStreet" th:text="*{personalDataEntity.address.street}"></label>
+            </div>
+        </div>
+
+        <div class="row">
+            <label for="legalAddressPostalCode" class="col-lg-3 control-label"
+                   th:text="#{registration.form.address.postalCode}"></label>
+
+            <div class="col-lg-5">
+                <label id="legalAddressPostalCode" th:text="*{personalDataEntity.address.postalCode}"></label>
+
+            </div>
+        </div>
+
+
+        <div th:if="*{personalDataEntity.isMailAddress}">
+            <h4 class="panel-title"> Adres do korespondencji </h4>
+
+            <div class="row">
+                <label for="mailAddressCountry" class="col-lg-3 control-label"
+                       th:text="#{registration.form.address.country}"></label>
+                <div class="col-lg-5">
+                    <label id="mailAddressCountry" th:text="*{personalDataEntity.mailAddress.country}"></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="mailAddressCity" class="col-lg-3 control-label"
+                       th:text="#{registration.form.address.city}"></label>
+                <div class="col-lg-5">
+                    <label id="mailAddressCity" th:text="*{personalDataEntity.mailAddress.city}"></label>
+                </div>
+            </div>
+
+            <div class="row">
+                <label for="mailAddressStreet" class="col-lg-3 control-label"
+                       th:text="#{registration.form.address.street}"></label>
+                <div class="col-lg-5">
+                    <label id="mailAddressStreet" th:text="*{personalDataEntity.mailAddress.street}"></label>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <label for="mailAddressPostalCode" class="col-lg-3 control-label"
+                       th:text="#{registration.form.address.postalCode}"></label>
+                <div class="col-lg-5">
+                    <label id="mailAddressPostalCode" th:text="*{personalDataEntity.mailAddress.postalCode}"></label>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
