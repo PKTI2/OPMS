@@ -23,9 +23,10 @@
     </div>
 
     <div th:if="${testInstance != null}" th:object="${testInstance}">
-        <h4 th:text="*{name}">
+        <h4 th:text="*{testDefinitionEntity.name}">
             Nazwa
         </h4>
+        <td th:text="${#dates.format(testInstance.creationDate, 'dd MMMMM yyyy')}"></td>
         <div class="row" th:each="node, iter : *{nodes}">
             <label class="col-lg-2"
                  th:text="*{nodes[__${iter.index}__].nodeDefinition.label}"></label>

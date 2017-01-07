@@ -12,7 +12,10 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,8 +31,6 @@ import java.util.List;
 
 @Table(name = "TEST_INSTANCE")
 public class TestInstanceEntity extends BaseEntity {
-    @Column(name = "name")
-    private String name;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<NodeInstanceEntity> nodes;
@@ -37,8 +38,11 @@ public class TestInstanceEntity extends BaseEntity {
     @OneToOne(cascade = CascadeType.MERGE)
     private TestDefinitionEntity testDefinitionEntity;
 
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
+
     public TestInstanceEntity(TestDefinitionEntity testDefinition) {
-        this.name = "";
         this.nodes = new ArrayList<>();
         this.testDefinitionEntity = testDefinition;
 

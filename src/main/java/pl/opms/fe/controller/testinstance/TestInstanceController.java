@@ -19,6 +19,8 @@ import pl.opms.be.service.TestDefinitionService;
 import pl.opms.be.service.TestInstanceService;
 import pl.opms.be.validator.TestInstanceValidator;
 
+import java.util.Date;
+
 /**
  * Created by howor on 29.12.2016.
  */
@@ -77,6 +79,7 @@ public class TestInstanceController {
             return "test-instance/add";
         }
         try {
+            newInstance.setCreationDate(new Date());
             patientEntity.getTests().add(newInstance);
             testInstanceService.save(newInstance);
             patientService.save(patientEntity);
