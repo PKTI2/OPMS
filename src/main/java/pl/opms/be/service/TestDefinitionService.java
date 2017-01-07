@@ -33,4 +33,8 @@ public class TestDefinitionService {
     public Long countByName(String name) {
         return testDefinitionRepository.countByName(name);
     }
+
+    public TestDefinitionEntity findOne(Long id) {
+        return testDefinitionRepository.findOne(id);
+    }
 }

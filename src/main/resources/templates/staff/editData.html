@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
 <head>
-
-    <title>Spring Security Example </title>
+    <title>Hello Spring Security</title>
     <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-
+    <!-- Bootstrap -->
     <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" th:href="@{/css/sidebar.css}"/>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -18,11 +18,9 @@
 <div class="container">
     <div th:replace="fragments/header :: header">...</div>
 
-    <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
-    </span></button>
-        Pomyślnie utworzono konto!
-    </div>
+
+    <div th:replace="fragments/submenu :: submenu">...</div>
+
 
     <div class="alert alert-danger alert-dismissible" role="alert" th:if="${error}">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
@@ -31,7 +29,7 @@
         Błąd zapisu! Spróbuj ponownie!
     </div>
 
-    <form th:action="@{/admin/staff/register/save}" th:object="${staff}" method="post">
+    <form th:action="@{/staff/editData/save}" th:object="${staff}" method="post">
         <fieldset>
             <div class="row">
                 <div class="form-group"
@@ -160,25 +158,27 @@
                            th:text="#{registration.form.address.postalCode}"></label>
 
                     <div class="col-lg-5">
-                        <input id="legalAddressPostalCode" type="text" th:field="*{personalDataEntity.address.postalCode}"
+                        <input id="legalAddressPostalCode" type="text"
+                               th:field="*{personalDataEntity.address.postalCode}"
                                class="form-control"/>
-                        <label class="control-label" th:errors="*{personalDataEntity.address.postalCode}">[error]</label>
+                        <label class="control-label"
+                               th:errors="*{personalDataEntity.address.postalCode}">[error]</label>
                     </div>
                 </div>
             </div>
 
 
             <div class="panel-group" id="accordion">
-                <div class="panel panel-default" >
+                <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
 
 
                             <div id="address-collapse" onclick="$('.collapse').collapse()" class="checkbox">
                                 <label data-toggle="collapse" data-target="#collapseOne">
-                                    <input  type="checkbox" th:value="*{personalDataEntity.isMailAddress}"
-                                            th:checked="*{personalDataEntity.isMailAddress}"
-                                            th:field="*{personalDataEntity.isMailAddress}"/>
+                                    <input type="checkbox" th:value="*{personalDataEntity.isMailAddress}"
+                                           th:checked="*{personalDataEntity.isMailAddress}"
+                                           th:field="*{personalDataEntity.isMailAddress}"/>
                                     Adres do korespondencji (jeżeli jest inny niż zamieszkania)
                                 </label>
                             </div>
@@ -194,9 +194,11 @@
                                            th:text="#{registration.form.address.country}"></label>
 
                                     <div class="col-lg-5">
-                                        <input id="mailAddressCountry" type="text" th:field="*{personalDataEntity.mailAddress.country}"
+                                        <input id="mailAddressCountry" type="text"
+                                               th:field="*{personalDataEntity.mailAddress.country}"
                                                class="form-control"/>
-                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.country}">[error]</label>
+                                        <label class="control-label"
+                                               th:errors="*{personalDataEntity.mailAddress.country}">[error]</label>
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +210,8 @@
                                            th:text="#{registration.form.address.city}"></label>
 
                                     <div class="col-lg-5">
-                                        <input id="mailAddressCity" type="text" th:field="*{personalDataEntity.mailAddress.city}"
+                                        <input id="mailAddressCity" type="text"
+                                               th:field="*{personalDataEntity.mailAddress.city}"
                                                class="form-control"/>
                                         <label class="control-label" th:errors="*{personalDataEntity.mailAddress.city}">[error]</label>
                                     </div>
@@ -222,9 +225,11 @@
                                            th:text="#{registration.form.address.street}"></label>
 
                                     <div class="col-lg-5">
-                                        <input id="mailAddressStreet" type="text" th:field="*{personalDataEntity.mailAddress.street}"
+                                        <input id="mailAddressStreet" type="text"
+                                               th:field="*{personalDataEntity.mailAddress.street}"
                                                class="form-control"/>
-                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.street}">[error]</label>
+                                        <label class="control-label"
+                                               th:errors="*{personalDataEntity.mailAddress.street}">[error]</label>
                                     </div>
                                 </div>
                             </div>
@@ -237,9 +242,11 @@
                                            th:text="#{registration.form.address.postalCode}"></label>
 
                                     <div class="col-lg-5">
-                                        <input id="mailAddressPostalCode" type="text" th:field="*{personalDataEntity.mailAddress.postalCode}"
+                                        <input id="mailAddressPostalCode" type="text"
+                                               th:field="*{personalDataEntity.mailAddress.postalCode}"
                                                class="form-control"/>
-                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.postalCode}">[error]</label>
+                                        <label class="control-label"
+                                               th:errors="*{personalDataEntity.mailAddress.postalCode}">[error]</label>
                                     </div>
                                 </div>
                             </div>
@@ -261,53 +268,13 @@
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
-                    <label for="username" class="col-lg-3 control-label"
-                           th:text="#{registration.form.username}"></label>
-
-                    <div class="col-lg-5">
-                        <input id="username" type="text" th:field="*{username}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{username}">[error]</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('roleEntity')} ? 'has-error'">
-                    <label class="col-lg-3 control-label"
-                           th:text="#{registration.form.role}"></label>
-
-                    <div class="col-lg-5">
-                        <select id="roleSelect" th:field="*{roleEntity}" class="form-control">
-                            <option th:each="roleNode : ${roles}" th:value="${roleNode.id}"
-                                    th:text="${roleNode.name}"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="form-group">
-                    <label for="username" class="col-lg-3 control-label"
-                           th:text="#{registration.form.password}"></label>
-
-                    <div class="col-lg-5">
-                        <label class="control-label" th:text="*{password}"></label>
-                    </div>
-                </div>
-            </div>
         </fieldset>
         <input type="submit" value="save"/>
     </form>
     <script th:inline="javascript">
         var test = [[${staff.personalDataEntity.isMailAddress}]];
 
-        if(test === true) {
+        if (test === true) {
             $('.collapse').collapse();
         }
     </script>
