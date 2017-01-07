@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Definicje badań</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Bootstrap -->
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="fragments/header :: header">...</div>
+
+
+    <h3 th:text="${patientId}? #{test.add} : #{testdefinition.crud.title}">Definicje badań</h3>
+</div>
+
+<div class="container">
+    <form class="form-inline" th:action="@{/test-instance/browse/open}" method="post">
+        <table class="table">
+            <thead>
+            <tr>
+                <th th:text="#{testInstance.creationDate}">Data wykonania</th>
+                <th th:text="#{testInstance.testDefinition}">Typ</th>
+                <th th:text="#{actions}">Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="testInstance, iter : ${testInstances}">
+                <td th:text="${testInstance.creationDate}">Przykładowa nazwa</td>
+                <td th:text="${testInstance.testDefinitionEntity.name}">Przykładowa wartość</td>
+                <td>
+                    <button type="submit" class="btn btn-default" name="rowIndex" th:value="${iter.index}">
+                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
+                        <th:block th:text="#{testInstance.open}">Otwórz</th:block>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

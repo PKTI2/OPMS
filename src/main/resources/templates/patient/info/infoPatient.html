@@ -20,7 +20,7 @@
     <th:block th:object="${patientEntity}">
 
         <div class="panel-group" id="accordion">
-            <div class="panel panel-default" >
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
                         <div onclick="$('.collapse').collapse()" class="checkbox">
@@ -35,29 +35,74 @@
                     <div class="panel-body">
 
                         <table class="table">
-                            <tr><th><h3>Dane:</h3></th><th></th></tr>
+                            <tr>
+                                <th><h3>Dane:</h3></th>
+                                <th></th>
+                            </tr>
 
-                            <tr><th> Imie: </th><td th:text="*{personalDataEntity.firstName}"></td></tr>
-                            <tr><th> Nazwisko: </th><td th:text="*{personalDataEntity.lastName}"></td></tr>
-                            <tr><th> Data urodzenia: </th><td th:text="*{personalDataEntity.birthDate}"></td></tr>
-                            <tr><th> Numer PESEL: </th><td th:text="*{personalDataEntity.peselNumber}"></td></tr>
+                            <tr>
+                                <th> Imie:</th>
+                                <td th:text="*{personalDataEntity.firstName}"></td>
+                            </tr>
+                            <tr>
+                                <th> Nazwisko:</th>
+                                <td th:text="*{personalDataEntity.lastName}"></td>
+                            </tr>
+                            <tr>
+                                <th> Data urodzenia:</th>
+                                <td th:text="*{personalDataEntity.birthDate}"></td>
+                            </tr>
+                            <tr>
+                                <th> Numer PESEL:</th>
+                                <td th:text="*{personalDataEntity.peselNumber}"></td>
+                            </tr>
 
-                            <tr><th> Waga: </th><td th:text="*{patientData.weight}"></td></tr>
-                            <tr><th> Wzrost: </th><td th:text="*{patientData.height}"></td></tr>
-                            <tr><th> Grupa krwi: </th><td th:text="*{patientData.bloodType}"></td>
+                            <tr>
+                                <th> Waga:</th>
+                                <td th:text="*{patientData.weight}"></td>
+                            </tr>
+                            <tr>
+                                <th> Wzrost:</th>
+                                <td th:text="*{patientData.height}"></td>
+                            </tr>
+                            <tr>
+                                <th> Grupa krwi:</th>
+                                <td th:text="*{patientData.bloodType}"></td>
                                 <td th:text="*{patientData.bloodAntigen}">
                                     <!--<option value="true">RH+</option>-->
                                     <!--<option value="false">RH-</option>-->
-                                </td></tr>
-                            <tr><th> Płeć: </th><td th:text="*{patientData.gender}"></td></tr>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th> Płeć:</th>
+                                <td th:text="*{patientData.gender}"></td>
+                            </tr>
 
-                            <tr ><th> Numer telefonu: </th><td name="phonenumber"></td></tr>
+                            <tr>
+                                <th> Numer telefonu:</th>
+                                <td name="phonenumber"></td>
+                            </tr>
 
-                            <tr><th><h3>Adres: </h3></th><th></th></tr>
-                            <tr th:object="${patientEntity.personalDataEntity.address}"><th> Kraj pochodzenia: </th><td th:text="*{country}"></td></tr>
-                            <tr th:object="${patientEntity.personalDataEntity.address}"><th> Miasto: </th><td th:text="*{city}"></td></tr>
-                            <tr th:object="${patientEntity.personalDataEntity.address}"><th> Kod pocztowy: </th><td th:text="*{postalCode}"></td></tr>
-                            <tr th:object="${patientEntity.personalDataEntity.address}"><th> Ulica: </th><td th:text="*{street}"></td></tr>
+                            <tr>
+                                <th><h3>Adres: </h3></th>
+                                <th></th>
+                            </tr>
+                            <tr th:object="${patientEntity.personalDataEntity.address}">
+                                <th> Kraj pochodzenia:</th>
+                                <td th:text="*{country}"></td>
+                            </tr>
+                            <tr th:object="${patientEntity.personalDataEntity.address}">
+                                <th> Miasto:</th>
+                                <td th:text="*{city}"></td>
+                            </tr>
+                            <tr th:object="${patientEntity.personalDataEntity.address}">
+                                <th> Kod pocztowy:</th>
+                                <td th:text="*{postalCode}"></td>
+                            </tr>
+                            <tr th:object="${patientEntity.personalDataEntity.address}">
+                                <th> Ulica:</th>
+                                <td th:text="*{street}"></td>
+                            </tr>
 
                             <!--<tr><th><h3>Adres korespondencyjny: </h3></th><th></th></tr>-->
                             <!--<tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Kraj pochodzenia: </th><td th:text="*{country}"></td></tr>-->
@@ -83,36 +128,20 @@
                 </div>
             </div>
         </div>
+        <fieldset>
+            <legend th:text="#{patient.tests}">Badania:</legend>
+            <a class="btn btn-default"
+               th:href="@{${'/test-instance/browse'}(patientId=${patientEntity.id})}">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                <th:block th:text="#{patient.browseTests}">Przeglądaj badania</th:block>
+            </a>
 
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default" >
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <div onclick="$('.collapse').collapse()" class="checkbox">
-                            <label data-toggle="collapse" data-target="#collapseTests">
-                                Badania
-                            </label>
-                        </div>
-                    </h4>
-                </div>
-
-                <div th:id="'collapseTests'" class="panel-collapse collapse">
-                    <div class="panel-body">
-
-                        miejsce na liste badań
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <a class="btn btn-default"
-           th:href="@{${'/test-definition/crud'}(patientId=${patientEntity.id})}">
-            <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-            <th:block th:text="#{test.add}">Dodaj</th:block>
-        </a>
-
+            <a class="btn btn-default"
+               th:href="@{${'/test-definition/crud'}(patientId=${patientEntity.id})}">
+                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                <th:block th:text="#{test.add}">Dodaj</th:block>
+            </a>
+        </fieldset>
     </th:block>
 
 </div>
