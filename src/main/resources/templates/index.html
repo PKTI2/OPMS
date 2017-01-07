@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
+>
 <head>
     <title>Hello Spring Security</title>
     <meta charset="utf-8"/>
@@ -9,13 +9,42 @@
     <!-- Bootstrap -->
     <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-
+<div class="topbar">
+    Witaj,
+    <span sec:authentication="name"></span>
+    <a href="/logout" th:href="@{#}" onclick="$('#logoutForm').submit();">Wyloguj</a>
+    <a th:href="@{/profile}">Profil</a>
+    <form style="visibility: hidden" id="logoutForm" method="post" action="#" th:action="@{/logout}"></form>
+</div>
 <div class="container">
-    <div th:replace="fragments/header :: header">...</div>
+    <!---<div th:replace="fragments/header :: header">...</div>-->
+    <div class="page-header">
+
+        <h1 style="font-size: 90px;">OPMS</h1>
+    </div>
+    <a href="#" th:href="@{/patient/add}">
+        <div class="box">
+            <span class="glyphicon glyphicon-user" style="font-size: 240px;"></span>
+            Dodaj <br/> Pacjenta
+        </div>
+    </a>
+    <a href="#" th:href="@{/admin/roles/create}">
+        <div class="box">
+            <span class="glyphicon glyphicon-eye-open" style="font-size: 240px;"></span>
+            Obchód lekarski
+        </div>
+    </a>
+    <a href="#" th:href="@{/admin/roles/create}">
+        <div class="box">
+            <span class="glyphicon glyphicon-search" style="font-size: 240px;"></span>
+            Szukaj
+        </div>
+    </a>
 
     <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
@@ -23,8 +52,8 @@
         Hasło zostało zmienione pomyślnie!
     </div>
 
-    <h1>Witaj</h1>
-    <h2><span sec:authentication="name"></span></h2>
+    <!--<h1>Witaj</h1>-->
+    <!--<h2><span sec:authentication="name"></span></h2>-->
 
 </div>
 </body>
