@@ -14,6 +14,11 @@
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
+    </span></button>
+    Hasło zostało zmienione pomyślnie!
+</div>
 <div class="topbar">
     Witaj,
     <span sec:authentication="name"></span>
@@ -45,16 +50,6 @@
             Szukaj
         </div>
     </a>
-
-    <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
-    </span></button>
-        Hasło zostało zmienione pomyślnie!
-    </div>
-
-    <!--<h1>Witaj</h1>-->
-    <!--<h2><span sec:authentication="name"></span></h2>-->
-
 </div>
 </body>
 </html>
