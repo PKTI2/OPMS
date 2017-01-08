@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Bootstrap -->
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div th:fragment="chart(chartDataList)">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" th:inline="javascript">
+        google.load('visualization', '1.0', {
+            'packages': ['corechart']
+        });
+
+        function drawChart(name, map, divId) {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'word');
+            data.addColumn('number', '');
+
+            for (var k in map) {
+                if (map.hasOwnProperty(k)) {
+                    data.addRow([k, map[k]]);
+                }
+            }
+            // Set chart options
+            var options = {
+                'title': name,
+                is3D: true,
+                pieSliceText: 'label',
+                tooltip: {showColorCode: true},
+                'width': 900,
+                'height': 500,
+                legend: 'none'
+            };
+
+            var chart = new google.visualization.ScatterChart(document.getElementById(divId));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <div th:each="el, rowStat : ${chartDataList}">
+        <div th:id="'chart' + ${rowStat.index}">
+            <script th:inline="javascript">
+                drawChart([[${el.chartName}]], $.parseJSON([[${el.jsonChartDataMap}]]), 'chart' + [[${rowStat.index}]]);
+            </script>
+        </div>
+    </div>
+</div>
+</body>
+</html>

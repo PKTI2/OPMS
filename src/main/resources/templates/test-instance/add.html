@@ -36,17 +36,6 @@
 
     <form th:object="${newInstance}" th:action="@{/test-instance/add}" method="post">
         <fieldset>
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
-                    <label for="test-instance-name" class="col-lg-3 control-label">Nazwa</label>
-
-                    <div class="col-lg-5">
-                        <input id="test-instance-name" type="text" class="form-control" th:field="${newInstance.name}"
-                               required="required"/>
-                    </div>
-                </div>
-            </div>
             <div class="row" th:each="node, iter : *{nodes}">
                 <div class="form-group">
                     <label th:for="'node' + ${iter.count}" class="col-lg-3 control-label"

@@ -26,7 +26,6 @@ public class TestInstanceValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         TestInstanceEntity testInstanceEntity = (TestInstanceEntity) o;
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors,"name","nameNodFilled");
 
         try {
             errors.pushNestedPath("node");
