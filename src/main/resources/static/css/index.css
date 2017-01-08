@@ -1,0 +1,63 @@
+@import url(https://fonts.googleapis.com/css?family=Audiowide|Varela+Round&amp;subset=latin-ext);
+body {
+    background-color: rgba(3, 195, 255, 0.86);
+}
+
+.topbar {
+    width: 100%;
+    background-color: white;
+    margin: 0;
+    font-size: 18px;
+    font-family: 'Varela Round', sans-serif;
+    color: rgba(3, 175, 239, 0.8);
+    padding: 3px;
+}
+
+.topbar > a {
+    float: right;
+    padding-right: 5px;
+    color: rgba(3, 175, 239, 0.8);
+}
+
+.topbar > a:hover {
+    text-decoration: none;
+    background-color: #dff5ff;
+    color: rgba(3, 175, 239, 0.8);
+}
+
+.container {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-header {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-size: 100px;
+    color: #fff;
+}
+
+h1 {
+    font-family: 'Audiowide', cursive;
+}
+
+.box {
+    padding-top: 20px;
+    max-width: 260px;
+    height: 430px;
+    margin: 30px;
+    float: left;
+    background-color: #fff;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 50px;
+    text-align: center;
+    color: rgba(3, 175, 239, 0.8);
+    box-shadow: 2px 4px 28px -1px rgba(0,0,0,0.75);
+    border-radius: 10px;
+}
+
+.box:hover {
+    background-color: #dff5ff;
+}
