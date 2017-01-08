@@ -3,6 +3,7 @@ package pl.opms.fe.controller.testinstance;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,13 +48,7 @@ public class TestInstanceController {
     private PatientEntity patientEntity;
 
     @RequestMapping(path = "/display")
-    public String display(@RequestParam(required = true) Long id,
-                          ModelMap modelMap) {
-        TestInstanceEntity testInstanceEntity = testInstanceService.findOne(id);
-
-        if(testInstanceEntity != null) {
-            modelMap.addAttribute("testInstance",testInstanceEntity);
-        }
+    public String display(Model model) {
         return "/test-instance/display";
     }
 
