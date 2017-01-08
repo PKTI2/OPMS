@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "DEPARTMENT_TABLE")
 public class DepartmentEntity extends BaseEntity {
-    @OneToMany
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<RoomEntity> rooms;
 
     @Column(name = "department_name")

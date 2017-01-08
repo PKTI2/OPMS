@@ -1,0 +1,8 @@
+.glyphicon.glyphicon-one-fine-empty-dot {
+    margin-bottom: -.8em;
+    overflow: hidden;
+}
+.glyphicon.glyphicon-one-fine-empty-dot:before {
+    content:"\25cb";
+    font-size: 3em;
+}
