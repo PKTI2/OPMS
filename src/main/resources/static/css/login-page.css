@@ -4,11 +4,6 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-.login-page {
-    width: 360px;
-    padding: 8% 0 0;
-    margin: auto;
-}
 .form {
     position: relative;
     margin-left: auto;
@@ -22,6 +17,7 @@ body {
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
 }
+
 .form input {
     font-family: "Roboto", sans-serif;
     outline: 0;
@@ -33,6 +29,7 @@ body {
     box-sizing: border-box;
     font-size: 14px;
 }
+
 .form input[type=submit] {
     font-family: "Roboto", sans-serif;
     text-transform: uppercase;
@@ -46,18 +43,22 @@ body {
     cursor: pointer;
     border-radius: 10px;
 }
+
 .form input[type=submit]:hover,.form input[type=submit]:active,.form input[type=submit]:focus {
     background: rgba(3, 162, 222, 0.8);
 }
+
 .form .message {
     margin: 15px 0 0;
     color: #b3b3b3;
     font-size: 12px;
 }
+
 .form .message a {
     color: #039bd5;
     text-decoration: none;
 }
+
 .form .register-form {
     display: none;
 }
