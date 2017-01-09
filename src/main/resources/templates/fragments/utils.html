@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- Bootstrap -->
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div th:fragment="boolLocalizer(trueName,falseName,value)">
+    <th:block th:if="${value}" th:text="${trueName}"></th:block>
+    <th:block th:if="not ${value}" th:text="${falseName}"></th:block>
+</div>
+
+<div th:fragment="unitLocalizer(unit,value)">
+    <th:block th:text="${value} + ' ' + ${unit}"></th:block>
+</div>
+</body>
+</html>
