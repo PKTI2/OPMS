@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.opms.be.entity.PatientEntity;
 import pl.opms.be.entity.PersonalDataEntity;
+import pl.opms.be.entity.RoomEntity;
 import pl.opms.be.repository.PatientRepository;
 import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Page;
@@ -37,5 +38,9 @@ public class PatientService {
     public PatientEntity findOne(Long patientId) {
         return patientRepository.findOne(patientId);
 }
+
+    public Iterable<PatientEntity> findAll(Predicate predicate) {
+        return patientRepository.findAll(predicate);
+    }
 
 }
