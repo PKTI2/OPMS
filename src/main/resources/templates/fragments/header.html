@@ -12,13 +12,12 @@
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar" th:fragment="header" style="background-color: white">
+<nav class="navbar" th:fragment="header" style="background-color: white; box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">OPMS</a>
+            <a class="navbar-brand" href="/index">OPMS</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="#" th:href="@{/}">Panel Startowy</a></li>
             <li sec:authorize="hasRole('ROLE_ROLE')" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Role
                     <span class="caret"></span></a>

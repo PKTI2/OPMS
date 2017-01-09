@@ -53,7 +53,7 @@
                     <div class="col-lg-5" th:if="*{T(pl.opms.consts.NodeType).BOOL_CHECK_BOX == nodes[__${iter.index}__].nodeDefinition.nodeType}">
                         <div class="checkbox">
                             <input th:id="'node' + ${iter.count}" type="checkbox"
-                                   th:field="*{nodes[__${iter.index}__].booleanValue}" required="required"/>
+                                   th:field="*{nodes[__${iter.index}__].booleanValue}"/>
                         </div>
                     </div>
 

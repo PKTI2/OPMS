@@ -31,13 +31,13 @@
             Dodaj <br/> Pacjenta
         </div>
     </a>
-    <a sec:authorize="hasRole('ROLE_ROUND')" href="#" th:href="@{/admin/roles/create}">
+    <a sec:authorize="hasRole('ROLE_ROUND')" href="#" th:href="@{/round/department?id=2}">
         <div class="box">
             <span class="glyphicon glyphicon-eye-open" style="font-size: 240px;"></span>
             Obchód lekarski
         </div>
     </a>
-    <a sec:authorize="hasRole('ROLE_PATIENT_DATA')" href="#" th:href="@{/admin/roles/create}">
+    <a sec:authorize="hasRole('ROLE_PATIENT_DATA')" href="#" th:href="@{/patient/find}">
         <div class="box">
             <span class="glyphicon glyphicon-search" style="font-size: 240px;"></span>
             Szukaj
