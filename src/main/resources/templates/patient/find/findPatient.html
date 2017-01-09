@@ -71,10 +71,11 @@
 
 
                 <td>
-                    <button type="submit" class="btn btn-default" name="rowIndex" th:value="${iter.index}">
-                        <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
-                        <th:block th:text="#{patient.open}">Otwórz</th:block>
-                    </button>
+                    <a class="btn btn-default"
+                       th:href="@{${'/patient/info/infoPatient'}(id=${patient.id})}">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        <th:block>Więcej informacji</th:block>
+                    </a>
                 </td>
             </tr>
             </tbody>
