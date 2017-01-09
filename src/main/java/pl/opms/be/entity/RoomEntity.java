@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -27,6 +28,9 @@ public class RoomEntity extends BaseEntity {
     @Column(name = "room_number")
     private Integer roomNumber;
 
-    @ManyToOne
+    @Column
+    private String name;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private DepartmentEntity department;
 }
