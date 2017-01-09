@@ -109,7 +109,6 @@ public class MainController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String postLogin() {
-        // TODO Enable form login with Spring Security (trigger error for now)
         return "redirect:/login-error";
     }
 
