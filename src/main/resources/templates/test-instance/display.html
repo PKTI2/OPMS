@@ -39,7 +39,7 @@
             </div>
 
             <div th:if="*{T(pl.opms.consts.NodeType).BOOL_CHECK_BOX == nodes[__${iter.index}__].nodeDefinition.nodeType}"
-                 class="col-lg-4" th:text="*{nodes[__${iter.index}__].booleanValue}">
+                 class="col-lg-4" th:include="fragments/utils :: boolLocalizer('tak','nie',*{nodes[__${iter.index}__].booleanValue})">
             </div>
 
             <div th:if="*{T(pl.opms.consts.NodeType).INT == nodes[__${iter.index}__].nodeDefinition.nodeType}"

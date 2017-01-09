@@ -2,10 +2,12 @@ package pl.opms.fe.controller.patient;
 
 
 import com.querydsl.core.types.Predicate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.opms.be.entity.PatientEntity;
 import pl.opms.be.entity.QPatientEntity;
+import pl.opms.be.service.PatientService;
 
 import javax.annotation.PostConstruct;
 
@@ -22,6 +25,9 @@ import javax.annotation.PostConstruct;
  */
 @Controller
 public class InfoPatientController {
+
+    @Autowired
+    private PatientService patientService;
 
     private Pageable pageable;
     private Page<PatientEntity> page;
@@ -45,5 +51,13 @@ public class InfoPatientController {
 //        PatientEntity selected = patientEntity;
         redirectAttributes.addFlashAttribute("patientEntity", patientEntity);
         return "redirect:/patient/edit/editPatient";
+    }
+
+    @RequestMapping(value = "/patient/info/infoPatient", params = {"id"})
+    public String requestInfo(@RequestParam(required = true) Long id,
+                              ModelMap modelMap) {
+        PatientEntity patientEntity = patientService.findOne(id);
+        modelMap.addAttribute("patientEntity",patientEntity);
+        return "/patient/info/infoPatient";
     }
 }
