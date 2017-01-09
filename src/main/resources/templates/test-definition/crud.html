@@ -37,7 +37,6 @@
             <thead>
             <tr>
                 <th th:text="#{testdefinition.name}">Nazwa</th>
-                <th th:text="#{testdefinition.deprecated}">Przestarzały</th>
                 <th th:text="#{actions}">Akcje</th>
             </tr>
             </thead>
@@ -45,7 +44,6 @@
 
             <tr th:each="testDefinition, iter : ${testDefinitions}">
                 <td th:text="${testDefinition.name}">Przykładowa nazwa</td>
-                <td th:text="${testDefinition.deprecated}">Przykładowa wartość</td>
                 <td>
                     <button type="submit" class="btn btn-default" name="rowIndex" th:value="${iter.index}">
                         <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>

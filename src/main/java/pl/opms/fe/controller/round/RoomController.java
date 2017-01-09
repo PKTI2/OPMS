@@ -39,6 +39,7 @@ public class RoomController {
         BooleanExpression searchPredicate = qPatientEntity.patientData.room.id.eq(id);
         Collection<PatientEntity> patients = CollectionUtils.toCollection(patientService.findAll(searchPredicate));
         modelMap.addAttribute("patients",patients);
+        modelMap.addAttribute("patients",patients);
         modelMap.addAttribute("room",roomEntity);
         return "round/room";
     }

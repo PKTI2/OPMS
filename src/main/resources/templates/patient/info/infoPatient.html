@@ -59,23 +59,23 @@
 
                             <tr>
                                 <th> Waga:</th>
-                                <td th:text="*{patientData.weight}"></td>
+                                <td th:include="fragments/utils :: unitLocalizer('kg',*{patientData.weight})"></td>
+
                             </tr>
                             <tr>
                                 <th> Wzrost:</th>
-                                <td th:text="*{patientData.height}"></td>
+                                <td th:include="fragments/utils :: unitLocalizer('cm',*{patientData.height})"></td>
                             </tr>
                             <tr>
                                 <th> Grupa krwi:</th>
-                                <td th:text="*{patientData.bloodType}"></td>
-                                <td th:text="*{patientData.bloodAntigen}">
-                                    <!--<option value="true">RH+</option>-->
-                                    <!--<option value="false">RH-</option>-->
+                                <td>
+                                    <th:block th:text="*{patientData.bloodType}"></th:block>
+                                    <th:block th:include="fragments/utils :: boolLocalizer('+','-',*{patientData.bloodAntigen})"></th:block>
                                 </td>
                             </tr>
                             <tr>
                                 <th> Płeć:</th>
-                                <td th:text="*{patientData.gender}"></td>
+                                <td th:with="gender = *{patientData.gender.displayName}" th:text="#{${gender}}"></td>
                             </tr>
 
                             <tr>

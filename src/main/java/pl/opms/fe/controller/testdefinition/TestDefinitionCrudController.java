@@ -50,7 +50,7 @@ public class TestDefinitionCrudController {
     @PostConstruct
     public void init() {
         QTestDefinitionEntity qTestDefinitionEntity = QTestDefinitionEntity.testDefinitionEntity;
-        predicate = qTestDefinitionEntity.name.contains("").and(qTestDefinitionEntity.deprecated.isNotNull());
+        predicate = qTestDefinitionEntity.name.contains("").and(qTestDefinitionEntity.deprecated.isFalse());
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)

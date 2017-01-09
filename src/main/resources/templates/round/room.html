@@ -31,7 +31,7 @@
                         Płeć
                     </div>
                     <div class="col-md-6">
-                        <th:block th:text="${patient.patientData.gender}"></th:block>
+                        <th:block th:text="#{${patient.patientData.gender.displayName}}"></th:block>
                     </div>
                 </div>
                 <div class="row">
@@ -39,7 +39,7 @@
                         Waga
                     </div>
                     <div class="col-md-6">
-                        <th:block th:text="${patient.patientData.weight}"></th:block>
+                        <th:block th:include="fragments/utils :: unitLocalizer('kg',${patient.patientData.weight})"></th:block>
                     </div>
                 </div>
                 <div class="row">
@@ -47,7 +47,7 @@
                         Wzrost
                     </div>
                     <div class="col-md-6">
-                        <th:block th:text="${patient.patientData.height}"></th:block>
+                        <th:block th:include="fragments/utils :: unitLocalizer('cm',${patient.patientData.height})"></th:block>
                     </div>
                 </div>
                 <div class="row">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-6">
                         <th:block th:text="${patient.patientData.bloodType}"></th:block>
-                        <th:block th:text="${patient.patientData.bloodAntigen}"></th:block>
+                        <th:block th:include="fragments/utils :: boolLocalizer('+','-',${patient.patientData.bloodAntigen})"></th:block>
                     </div>
                 </div>
                 <div class="row">
