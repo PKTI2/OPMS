@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
 >
 <head>
     <meta charset="UTF-8"/>
@@ -19,7 +19,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="#" th:href="@{/}">Panel Startowy</a></li>
-            <li class="dropdown">
+            <li sec:authorize="hasRole('ROLE_ROLE')" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Role
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -27,29 +27,17 @@
                     <li><a href="#" th:href="@{/admin/roles/manage}">Zarządzaj</a></li>
                 </ul>
             </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Personel
-                    <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#" th:href="@{/admin/staff/register}">Dodaj</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
+
+            <li  sec:authorize="hasAnyRole('ROLE_ADD_TEST_DEF', 'ROLE_VIEW_TEST_DEF')" class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Badania
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#" th:href="@{/test-definition/add}">Dodaj</a></li>
-                    <li><a href="#" th:href="@{/test-definition/crud}">Szukaj</a></li>
+                    <li sec:authorize="hasRole('ROLE_ADD_TEST_DEF')"><a href="#" th:href="@{/test-definition/add}">Dodaj</a></li>
+                    <li sec:authorize="hasRole('ROLE_VIEW_TEST_DEF')"><a href="#" th:href="@{/test-definition/crud}">Szukaj</a></li>
                 </ul>
             </li>
-
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pacjent
-                    <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#" th:href="@{/patient/add}">Dodaj</a></li>
-                </ul>
-            </li>
+            <li sec:authorize="hasRole('ROLE_ADD_STAFF')"><a href="#" th:href="@{/admin/staff/register}">Dodaj personel</a></li>
+            <li sec:authorize="hasRole('ROLE_ADD_PATIENT')"><a href="#" th:href="@{/patient/add}">Dodaj pacjenta</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a th:href="@{/profile}">Profil</a></li>
