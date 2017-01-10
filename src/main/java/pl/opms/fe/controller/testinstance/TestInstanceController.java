@@ -78,7 +78,7 @@ public class TestInstanceController {
             patientEntity.getTests().add(newInstance);
             testInstanceService.save(newInstance);
             patientService.save(patientEntity);
-            return "redirect:/test-instance/add/success";
+            return "redirect:/test-definition/crud?patientId=" + patientEntity.getId();
         }catch (Exception e) {
             modelMap.addAttribute("error", true);
             logger.info(e.getMessage());
