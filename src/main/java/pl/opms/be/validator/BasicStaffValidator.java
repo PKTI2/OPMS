@@ -32,6 +32,10 @@ public class BasicStaffValidator implements Validator {
         rejectIfEmptyOrWhitespace(errors, "personalDataEntity.address.postalCode", "registration.form.empty");
         rejectIfEmptyOrWhitespace(errors, "medicalTitle", "registration.form.empty");
 
+        if (staffEntity.getPersonalDataEntity().getPeselNumber().length() != 11) {
+            errors.rejectValue("personalDataEntity.peselNumber", "registration.form.pesel.invalid");
+        }
+
         if (staffEntity.getPersonalDataEntity().getIsMailAddress()) {
             rejectIfEmpty(errors, "personalDataEntity.mailAddress.street", "registration.form.empty");
             rejectIfEmpty(errors, "personalDataEntity.mailAddress.city", "registration.form.empty");
