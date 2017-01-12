@@ -1,0 +1,38 @@
+body {
+    background-color: rgba(3, 195, 255, 0.86);
+    font-size: 20px;
+}
+
+.form {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 80%;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.form button {
+    bottom: 10px;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: rgba(3, 175, 239, 0.8);
+    width: 150px;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+th {
+    text-align: center;
+}

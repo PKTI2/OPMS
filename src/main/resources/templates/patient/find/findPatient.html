@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" th:href="@{/css/find.css}"/>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -15,100 +16,75 @@
 <div class="container">
     <div th:replace="fragments/header :: header">...</div>
 
-    <h2>Pacjenci</h2>
-    <table class="table">
-        <tbody>
-            <td>
-                <form class="form-inline" th:action="@{/patient/find/searchByLastName}" role="search" th:object="${searchBean}"
-                      method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" th:field="*{searchTermLastName}"/>
-                    </div>
-                    <button type="submit" class="btn btn-default">Szukaj w nazwisku</button>
-                </form>
-            </td>
-
-            <td>
-                <form class="form-inline" th:action="@{/patient/find/searchByFirstName}" role="search" th:object="${searchBean}"
-                      method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" th:field="*{searchTermFirstName}"/>
-                    </div>
-                    <button type="submit" class="btn btn-default">Szukaj w imieniu</button>
-                </form>
-            </td>
-
-            <td>
-                <form class="form-inline" th:action="@{/patient/find/searchByPeselNumber}" role="search" th:object="${searchBean}"
-                      method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" th:field="*{searchTermPeselNumber}"/>
-                    </div>
-                    <button type="submit" class="btn btn-default">Szukaj w peselu</button>
-                </form>
-            </td>
-        </tbody>
-    </table>
-</div>
-
-<div class="container">
-    <form class="form-inline" th:action="@{/patient/find/table}" method="post">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Nazwisko</th>
-                <th>Imie</th>
-                <th>Pesel</th>
-                <th>Podgląd</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <tr th:each="patient, iter : ${patients}">
-                <td th:text="${patient.personalDataEntity.lastName}"/>
-                <td th:text="${patient.personalDataEntity.firstName}"/>
-                <td th:text="${patient.personalDataEntity.peselNumber}"/>
+    <div class="form">
+        <form class="form-inline" th:action="@{/patient/find/searchByAll}" role="search" th:object="${searchBean}"
+              method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" th:field="*{searchTerm}"/>
+            </div>
+            <button type="submit" class="btn btn-default">Szukaj</button>
+        </form>
 
 
-                <td>
-                    <a class="btn btn-default"
-                       th:href="@{${'/patient/info/infoPatient'}(id=${patient.id})}">
-                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                        <th:block>Więcej informacji</th:block>
+        <form class="form-inline" th:action="@{/patient/find/table}" method="post">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nazwisko</th>
+                    <th>Imie</th>
+                    <th>Pesel</th>
+                    <th>Podgląd</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr th:each="patient, iter : ${patients}">
+                    <td th:text="${patient.personalDataEntity.lastName}"/>
+                    <td th:text="${patient.personalDataEntity.firstName}"/>
+                    <td th:text="${patient.personalDataEntity.peselNumber}"/>
+
+
+                    <td>
+                        <a class="btn btn-default"
+                           th:href="@{${'/patient/info/infoPatient'}(id=${patient.id})}">
+                            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                            <th:block>Więcej informacji</th:block>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <div th:if="${not #lists.isEmpty(patients)}">
+            <ul class="pagination">
+                <li th:class="${pageable.pageNumber eq 0} ? 'disabled' : ''">
+                    <a th:if="${not (pageable.pageNumber eq 0)}"
+                       th:href="@{${''}(pageNumber=${pageable.pageNumber - 1},size=${pageable.pageSize})}">Previous</a>
+                    <a th:if="${(pageable.pageNumber eq 0)}"
+                       href="javascript:void(0);">Previous</a>
+                </li>
+
+                <li th:each="pageNo : ${#numbers.sequence(0, totalPages - 1)}"
+                    th:class="${pageable.pageNumber eq pageNo}? 'active' : ''">
+                    <a th:if="${pageable.pageNumber  eq pageNo}" href="javascript:void(0);">
+                        <span th:text="${pageNo + 1}"></span>
                     </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
-    <div th:if="${not #lists.isEmpty(patients)}">
-        <ul class="pagination">
-            <li th:class="${pageable.pageNumber eq 0} ? 'disabled' : ''">
-                <a th:if="${not (pageable.pageNumber eq 0)}"
-                   th:href="@{${''}(pageNumber=${pageable.pageNumber - 1},size=${pageable.pageSize})}">Previous</a>
-                <a th:if="${(pageable.pageNumber eq 0)}"
-                   href="javascript:void(0);">Previous</a>
-            </li>
+                    <a th:if="${not (pageable.pageNumber  eq pageNo)}"
+                       th:href="@{${''}(pageNumber=${pageNo},size=${pageable.pageSize})}">
+                        <span th:text="${pageNo + 1}"></span>
+                    </a>
 
-            <li th:each="pageNo : ${#numbers.sequence(0, totalPages - 1)}"
-                th:class="${pageable.pageNumber eq pageNo}? 'active' : ''">
-                <a th:if="${pageable.pageNumber  eq pageNo}" href="javascript:void(0);">
-                    <span th:text="${pageNo + 1}"></span>
-                </a>
-                <a th:if="${not (pageable.pageNumber  eq pageNo)}"
-                   th:href="@{${''}(pageNumber=${pageNo},size=${pageable.pageSize})}">
-                    <span th:text="${pageNo + 1}"></span>
-                </a>
-
-            </li>
-            <li th:class="${(pageable.pageNumber + 1) ge totalPages} ? 'disabled' : ''">
-                <a th:if="${not ((pageable.pageNumber + 1) ge totalPages)}"
-                   th:href="@{${''}(pageNumber=${pageable.pageNumber+1},size=${pageable.pageSize})}">Next</a>
-                <a th:if="${((pageable.pageNumber + 1) ge totalPages)}"
-                   href="javascript:void(0);">Next</a>
-            </li>
-        </ul>
+                </li>
+                <li th:class="${(pageable.pageNumber + 1) ge totalPages} ? 'disabled' : ''">
+                    <a th:if="${not ((pageable.pageNumber + 1) ge totalPages)}"
+                       th:href="@{${''}(pageNumber=${pageable.pageNumber+1},size=${pageable.pageSize})}">Next</a>
+                    <a th:if="${((pageable.pageNumber + 1) ge totalPages)}"
+                       href="javascript:void(0);">Next</a>
+                </li>
+            </ul>
+        </div>
     </div>
+
 
     <div th:if="${#lists.isEmpty(patients)}">
         Nie znaleziono
