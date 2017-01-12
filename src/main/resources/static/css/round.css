@@ -1,0 +1,27 @@
+body {
+    background-color: rgba(3, 195, 255, 0.86);
+    font-size: 20px;
+}
+
+.form {
+    position: absolute;
+    margin-top: 50px;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 84%;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+.box {
+    float: left;
+    width: 260px;
+    padding: 25px;
+}
+
+.box:hover {
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}

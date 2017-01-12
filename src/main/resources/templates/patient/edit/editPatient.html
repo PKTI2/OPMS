@@ -45,7 +45,24 @@
                 <option value="FEMALE">Kobieta</option>
             </select></div></div>
         </div>
-        <div class="form-group row"><label class="col-xs-2 col-form-label"> Numer telefonu: </label><div class="col-xs-4"><input class="form-control" type="text" name="phonenumber"/> </div></div>
+        <!--<div class="form-group row"><label class="col-xs-2 col-form-label"> Numer telefonu: </label><div class="col-xs-4"><input class="form-control" type="text" name="phonenumber"/> </div></div>-->
+        <table class="table table-striped" th:unless="${#lists.isEmpty(patientEntity.personalDataEntity.phoneNumbers)}">
+            <tr>
+                <th class="col-sm-1"></th>
+                <th class="col-sm-1">Rodzaj kontaktu</th>
+                <th class="col-sm-1">numer</th>
+            </tr>
+            <tr th:each="contactPhone, rowStat : *{personalDataEntity.phoneNumbers}">
+                <td><button type="submit" name="removePhone" th:value="${rowStat.index}">Remove row</button></td>
+                <td><input type="text" class="form-control" th:field="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].description}"/></td>
+                <td><input type="number" class="form-control input-button-right" th:field="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].phoneNumber}"/>
+
+                </td>
+            </tr>
+        </table>
+        <input th:type="submit" name="addPhone" value="Dodaj nowy telefon"/>
+
+
         <h3>Adres: </h3>
         <div th:object="${patientEntity.personalDataEntity.address}" >
             <div class="form-group row"><label class="col-xs-2 col-form-label"> Kraj pochodzenia: </label><div class="col-xs-4"><input class="form-control" type="text" th:field="*{country}"/> </div></div>
@@ -54,6 +71,60 @@
             <div class="form-group row"><label class="col-xs-2 col-form-label"> Ulica: </label><div class="col-xs-4"><input class="form-control" type="text" th:field="*{street}"/> </div></div>
         </div>
         <!--<div class="checkbox"><label><input type="checkbox"/> Adres do korespondencji </label></div>-->
+
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default" >
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <div onclick="$('.collapse').collapse()" class="checkbox">
+                            <label data-toggle="collapse" data-target="#collapseOne">
+                                <input  type="checkbox" th:value="*{personalDataEntity.isMailAddress}" th:checked="*{personalDataEntity.isMailAddress}" th:field="*{personalDataEntity.isMailAddress}"/>
+                                Adres do korespondencji (jeżeli jest inny niż zamieszkania)</label>
+                        </div>
+                    </h4>
+                </div>
+
+                <div th:id="'collapseOne'" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+                        <div class="row">
+                            <div class="form-group" th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.country')} ? 'has-error'">
+                                <label class="col-xs-2 col-form-label"> Kraj pochodzenia: </label>
+                                <div class="col-lg-5"><input id="mailAddressCountry" type="text" th:field="*{personalDataEntity.mailAddress.country}" class="form-control"/>
+                                    <label class="control-label" th:errors="*{personalDataEntity.mailAddress.country}">[error]</label></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group" th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.city')} ? 'has-error'">
+                                <label class="col-xs-2 col-form-label"> Miasto: </label>
+                                <div class="col-lg-5"><input id="mailAddressCity" type="text" th:field="*{personalDataEntity.mailAddress.city}" class="form-control"/>
+                                    <label class="control-label" th:errors="*{personalDataEntity.mailAddress.city}">[error]</label></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group" th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.postalCode')} ? 'has-error'">
+                                <label class="col-xs-2 col-form-label"> Kod pocztowy: </label>
+                                <div class="col-lg-5"><input id="mailAddressPostalCode" type="text" th:field="*{personalDataEntity.mailAddress.postalCode}" class="form-control"/>
+                                    <label class="control-label" th:errors="*{personalDataEntity.mailAddress.postalCode}">[error]</label></div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group" th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.street')} ? 'has-error'">
+                                <label class="col-xs-2 col-form-label"> Ulica: </label>
+                                <div class="col-lg-5"><input id="mailAddressStreet" type="text" th:field="*{personalDataEntity.mailAddress.street}" class="form-control"/>
+                                    <label class="control-label" th:errors="*{personalDataEntity.mailAddress.street}">[error]</label></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
         <!--<div th:object="${patientEntity.patientData}" >-->
             <!--<div class="form-group row"><label class="col-xs-2 col-form-label"> Oddział: </label><div class="col-xs-4"><input class="form-control" type="text" th:field="*{department}"/></div></div>-->
