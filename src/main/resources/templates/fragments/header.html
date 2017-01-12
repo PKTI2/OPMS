@@ -37,6 +37,15 @@
             </li>
             <li sec:authorize="hasRole('ROLE_ADD_STAFF')"><a href="#" th:href="@{/admin/staff/register}">Dodaj personel</a></li>
             <li sec:authorize="hasRole('ROLE_ADD_PATIENT')"><a href="#" th:href="@{/patient/add}">Dodaj pacjenta</a></li>
+            <li>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Dane
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" th:href="@{/staff/showData}">Twoje dane</a></li>
+                    <li><a href="#" th:href="@{/staff/editData}">Edytuj dane</a></li>
+                    <li><a href="#" th:href="@{/staff/password/change}">Zmień hasło</a></li>
+                </ul>
+            </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a th:href="@{/profile}">Profil</a></li>
