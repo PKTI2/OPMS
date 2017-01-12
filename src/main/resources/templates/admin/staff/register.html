@@ -10,6 +10,7 @@
 
     <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" th:href="@{/css/reset-password.css}"/>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -17,300 +18,304 @@
 
 <div class="container">
     <div th:replace="fragments/header :: header">...</div>
-
-    <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
+    <div class="form">
+        <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
     </span></button>
-        Pomyślnie utworzono konto!
-    </div>
+            Pomyślnie utworzono konto!
+        </div>
 
-    <div class="alert alert-danger alert-dismissible" role="alert" th:if="${error}">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
+        <div class="alert alert-danger alert-dismissible" role="alert" th:if="${error}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
     </span></button>
-        <span class="sr-only">Error:</span>
-        Błąd zapisu! Spróbuj ponownie!
-    </div>
+            <span class="sr-only">Error:</span>
+            Błąd zapisu! Spróbuj ponownie!
+        </div>
 
-    <form th:action="@{/admin/staff/register/save}" th:object="${staff}" method="post">
-        <fieldset>
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('personalDataEntity.firstName')} ? 'has-error'">
-                    <label for="firstname" class="col-lg-3 control-label"
-                           th:text="#{registration.form.firstName}"></label>
+        <form th:action="@{/admin/staff/register/save}" th:object="${staff}" method="post">
+            <fieldset>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('personalDataEntity.firstName')} ? 'has-error'">
+                        <label for="firstname" class="col-lg-5 control-label"
+                               th:text="#{registration.form.firstName}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="firstname" type="text" th:field="*{personalDataEntity.firstName}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{personalDataEntity.firstName}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="firstname" type="text" th:field="*{personalDataEntity.firstName}"
+                                   class="form-control"/>
+                            <label class="control-label" th:errors="*{personalDataEntity.firstName}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('personalDataEntity.lastName')} ? 'has-error'">
-                    <label for="lastname" class="col-lg-3 control-label"
-                           th:text="#{registration.form.lastName}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('personalDataEntity.lastName')} ? 'has-error'">
+                        <label for="lastname" class="col-lg-5 control-label"
+                               th:text="#{registration.form.lastName}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="lastname" type="text" th:field="*{personalDataEntity.lastName}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{personalDataEntity.lastName}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="lastname" type="text" th:field="*{personalDataEntity.lastName}"
+                                   class="form-control"/>
+                            <label class="control-label" th:errors="*{personalDataEntity.lastName}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('personalDataEntity.peselNumber')} ? 'has-error'">
-                    <label for="pesel" class="col-lg-3 control-label"
-                           th:text="#{registration.form.peselNumber}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('personalDataEntity.peselNumber')} ? 'has-error'">
+                        <label for="pesel" class="col-lg-5 control-label"
+                               th:text="#{registration.form.peselNumber}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="pesel" type="number" th:field="*{personalDataEntity.peselNumber}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{personalDataEntity.peselNumber}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="pesel" type="number" th:field="*{personalDataEntity.peselNumber}"
+                                   class="form-control"/>
+                            <label class="control-label" th:errors="*{personalDataEntity.peselNumber}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('personalDataEntity.birthDate')} ? 'has-error'">
-                    <label for="birthDate" class="col-lg-3 control-label"
-                           th:text="#{registration.form.birthDate}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('personalDataEntity.birthDate')} ? 'has-error'">
+                        <label for="birthDate" class="col-lg-5 control-label"
+                               th:text="#{registration.form.birthDate}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="birthDate" type="date" th:field="*{personalDataEntity.birthDate}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{personalDataEntity.birthDate}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="birthDate" type="date" th:field="*{personalDataEntity.birthDate}"
+                                   class="form-control"/>
+                            <label class="control-label" th:errors="*{personalDataEntity.birthDate}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <table class="table table-striped" th:unless="${#lists.isEmpty(staff.personalDataEntity.phoneNumbers)}">
-                <tr>
-                    <th class="col-sm-1"></th>
-                    <th class="col-sm-1">Rodzaj kontaktu</th>
-                    <th class="col-sm-1">numer</th>
-                </tr>
-                <tr th:each="contactPhone, rowStat : *{personalDataEntity.phoneNumbers}">
-                    <td></td>
-                    <td><input type="text" class="form-control"
-                               th:field="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].description}"/></td>
-                    <td><input type="number" class="form-control input-button-right"
-                               th:field="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].phoneNumber}"/>
-                        <span class="col-sm-1 row-delete-button">
-                            <button type="submit" name="removePhone" th:value="${rowStat.index}">
-                                Remove row
-                            </button>
-                            </span>
-                    </td>
-                </tr>
-            </table>
-            <input th:type="submit" name="addPhone" value="Dodaj nowy telefon"/>
+                <table class="table table-striped" th:unless="${#lists.isEmpty(staff.personalDataEntity.phoneNumbers)}">
+                    <tr>
+                        <th class="col"></th>
+                        <th class="col">Rodzaj kontaktu</th>
+                        <th class="col">Numer</th>
+                    </tr>
+                    <tr style="padding-left: 0px;" th:each="contactPhone, rowStat : *{personalDataEntity.phoneNumbers}">
+                        <td><input style="width: 70px;" th:type="submit" name="removePhone" th:value="${rowStat.index}"></input></td>
+                        <td class="col"><input style="width: 160px; height: 50px; font-size: 16px;" type="text" class="form-control" th:field="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].description}"/></td>
+                        <td class="col"><input style="width: 160px; height: 50px; font-size: 16px;" type="number" class="form-control input-button-right" th:field="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].phoneNumber}"/></td>
+                    </tr>
+                </table>
+                <input th:type="submit" name="addPhone" value="Dodaj telefon"/>
 
-            <p>Adres zameldowania</p>
+                <h2>Adres zameldowania</h2>
 
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('personalDataEntity.address.country')} ? 'has-error'">
-                    <label for="legalAddressCountry" class="col-lg-3 control-label"
-                           th:text="#{registration.form.address.country}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('personalDataEntity.address.country')} ? 'has-error'">
+                        <label for="legalAddressCountry" class="col-lg-5 control-label"
+                               th:text="#{registration.form.address.country}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="legalAddressCountry" type="text" th:field="*{personalDataEntity.address.country}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{personalDataEntity.address.country}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="legalAddressCountry" type="text" th:field="*{personalDataEntity.address.country}"
+                                   class="form-control"/>
+                            <label class="control-label"
+                                   th:errors="*{personalDataEntity.address.country}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('personalDataEntity.address.city')} ? 'has-error'">
-                    <label for="legalAddressCity" class="col-lg-3 control-label"
-                           th:text="#{registration.form.address.city}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('personalDataEntity.address.city')} ? 'has-error'">
+                        <label for="legalAddressCity" class="col-lg-5 control-label"
+                               th:text="#{registration.form.address.city}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="legalAddressCity" type="text" th:field="*{personalDataEntity.address.city}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{personalDataEntity.address.city}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="legalAddressCity" type="text" th:field="*{personalDataEntity.address.city}"
+                                   class="form-control"/>
+                            <label class="control-label" th:errors="*{personalDataEntity.address.city}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('personalDataEntity.address.street')} ? 'has-error'">
-                    <label for="legalAddressStreet" class="col-lg-3 control-label"
-                           th:text="#{registration.form.address.street}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('personalDataEntity.address.street')} ? 'has-error'">
+                        <label for="legalAddressStreet" class="col-lg-5 control-label"
+                               th:text="#{registration.form.address.street}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="legalAddressStreet" type="text" th:field="*{personalDataEntity.address.street}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{personalDataEntity.address.street}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="legalAddressStreet" type="text" th:field="*{personalDataEntity.address.street}"
+                                   class="form-control"/>
+                            <label class="control-label"
+                                   th:errors="*{personalDataEntity.address.street}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('personalDataEntity.address.postalCode')} ? 'has-error'">
-                    <label for="legalAddressPostalCode" class="col-lg-3 control-label"
-                           th:text="#{registration.form.address.postalCode}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('personalDataEntity.address.postalCode')} ? 'has-error'">
+                        <label for="legalAddressPostalCode" class="col-lg-5 control-label"
+                               th:text="#{registration.form.address.postalCode}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="legalAddressPostalCode" type="text" th:field="*{personalDataEntity.address.postalCode}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{personalDataEntity.address.postalCode}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="legalAddressPostalCode" type="text"
+                                   th:field="*{personalDataEntity.address.postalCode}"
+                                   class="form-control"/>
+                            <label class="control-label"
+                                   th:errors="*{personalDataEntity.address.postalCode}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="panel-group" id="accordion">
-                <div class="panel panel-default" >
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
 
+                                <div id="address-collapse" onclick="$('.collapse').collapse()" class="checkbox">
+                                    <label data-toggle="collapse" data-target="#collapseOne">
+                                        <input style="width: auto;" type="checkbox" th:value="*{personalDataEntity.isMailAddress}"
+                                               th:checked="*{personalDataEntity.isMailAddress}"
+                                               th:field="*{personalDataEntity.isMailAddress}"/>
+                                        Adres do korespondencji (jeżeli jest inny niż zamieszkania)
+                                    </label>
+                                </div>
 
-                            <div id="address-collapse" onclick="$('.collapse').collapse()" class="checkbox">
-                                <label data-toggle="collapse" data-target="#collapseOne">
-                                    <input  type="checkbox" th:value="*{personalDataEntity.isMailAddress}"
-                                            th:checked="*{personalDataEntity.isMailAddress}"
-                                            th:field="*{personalDataEntity.isMailAddress}"/>
-                                    Adres do korespondencji (jeżeli jest inny niż zamieszkania)
-                                </label>
-                            </div>
+                            </h4>
+                        </div>
+                        <div th:id="'collapseOne'" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="form-group"
+                                         th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.country')} ? 'has-error'">
+                                        <label for="mailAddressCountry" class="col-lg-5 control-label"
+                                               th:text="#{registration.form.address.country}"></label>
 
-                        </h4>
-                    </div>
-                    <div th:id="'collapseOne'" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="form-group"
-                                     th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.country')} ? 'has-error'">
-                                    <label for="mailAddressCountry" class="col-lg-3 control-label"
-                                           th:text="#{registration.form.address.country}"></label>
-
-                                    <div class="col-lg-5">
-                                        <input id="mailAddressCountry" type="text" th:field="*{personalDataEntity.mailAddress.country}"
-                                               class="form-control"/>
-                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.country}">[error]</label>
+                                        <div class="col-lg-4">
+                                            <input id="mailAddressCountry" type="text"
+                                                   th:field="*{personalDataEntity.mailAddress.country}"
+                                                   class="form-control"/>
+                                            <label class="control-label"
+                                                   th:errors="*{personalDataEntity.mailAddress.country}">[error]</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="form-group"
-                                     th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.city')} ? 'has-error'">
-                                    <label for="mailAddressCity" class="col-lg-3 control-label"
-                                           th:text="#{registration.form.address.city}"></label>
+                                <div class="row">
+                                    <div class="form-group"
+                                         th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.city')} ? 'has-error'">
+                                        <label for="mailAddressCity" class="col-lg-5 control-label"
+                                               th:text="#{registration.form.address.city}"></label>
 
-                                    <div class="col-lg-5">
-                                        <input id="mailAddressCity" type="text" th:field="*{personalDataEntity.mailAddress.city}"
-                                               class="form-control"/>
-                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.city}">[error]</label>
+                                        <div class="col-lg-4">
+                                            <input id="mailAddressCity" type="text"
+                                                   th:field="*{personalDataEntity.mailAddress.city}"
+                                                   class="form-control"/>
+                                            <label class="control-label"
+                                                   th:errors="*{personalDataEntity.mailAddress.city}">[error]</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="form-group"
-                                     th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.street')} ? 'has-error'">
-                                    <label for="mailAddressStreet" class="col-lg-3 control-label"
-                                           th:text="#{registration.form.address.street}"></label>
+                                <div class="row">
+                                    <div class="form-group"
+                                         th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.street')} ? 'has-error'">
+                                        <label for="mailAddressStreet" class="col-lg-5 control-label"
+                                               th:text="#{registration.form.address.street}"></label>
 
-                                    <div class="col-lg-5">
-                                        <input id="mailAddressStreet" type="text" th:field="*{personalDataEntity.mailAddress.street}"
-                                               class="form-control"/>
-                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.street}">[error]</label>
+                                        <div class="col-lg-4">
+                                            <input id="mailAddressStreet" type="text"
+                                                   th:field="*{personalDataEntity.mailAddress.street}"
+                                                   class="form-control"/>
+                                            <label class="control-label"
+                                                   th:errors="*{personalDataEntity.mailAddress.street}">[error]</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
 
-                            <div class="row">
-                                <div class="form-group"
-                                     th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.postalCode')} ? 'has-error'">
-                                    <label for="mailAddressPostalCode" class="col-lg-3 control-label"
-                                           th:text="#{registration.form.address.postalCode}"></label>
+                                <div class="row">
+                                    <div class="form-group"
+                                         th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.postalCode')} ? 'has-error'">
+                                        <label for="mailAddressPostalCode" class="col-lg-5 control-label"
+                                               th:text="#{registration.form.address.postalCode}"></label>
 
-                                    <div class="col-lg-5">
-                                        <input id="mailAddressPostalCode" type="text" th:field="*{personalDataEntity.mailAddress.postalCode}"
-                                               class="form-control"/>
-                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.postalCode}">[error]</label>
+                                        <div class="col-lg-4">
+                                            <input id="mailAddressPostalCode" type="text"
+                                                   th:field="*{personalDataEntity.mailAddress.postalCode}"
+                                                   class="form-control"/>
+                                            <label class="control-label"
+                                                   th:errors="*{personalDataEntity.mailAddress.postalCode}">[error]</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('medicalTitle')} ? 'has-error'">
-                    <label for="medicalTitle" class="col-lg-3 control-label"
-                           th:text="#{registration.form.medicalTitle}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('medicalTitle')} ? 'has-error'">
+                        <label for="medicalTitle" class="col-lg-5 control-label"
+                               th:text="#{registration.form.medicalTitle}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="medicalTitle" type="text" th:field="*{medicalTitle}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{medicalTitle}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="medicalTitle" type="text" th:field="*{medicalTitle}"
+                                   class="form-control"/>
+                            <label class="control-label" th:errors="*{medicalTitle}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
-                    <label for="username" class="col-lg-3 control-label"
-                           th:text="#{registration.form.username}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
+                        <label for="username" class="col-lg-5 control-label"
+                               th:text="#{registration.form.username}"></label>
 
-                    <div class="col-lg-5">
-                        <input id="username" type="text" th:field="*{username}"
-                               class="form-control"/>
-                        <label class="control-label" th:errors="*{username}">[error]</label>
+                        <div class="col-lg-4">
+                            <input id="username" type="text" th:field="*{username}"
+                                   class="form-control"/>
+                            <label class="control-label" th:errors="*{username}">[error]</label>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group"
-                     th:classappend="${#fields.hasErrors('roleEntity')} ? 'has-error'">
-                    <label class="col-lg-3 control-label"
-                           th:text="#{registration.form.role}"></label>
+                <div class="row">
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('roleEntity')} ? 'has-error'">
+                        <label class="col-lg-5 control-label"
+                               th:text="#{registration.form.role}"></label>
 
-                    <div class="col-lg-5">
-                        <select id="roleSelect" th:field="*{roleEntity}" class="form-control">
-                            <option th:each="roleNode : ${roles}" th:value="${roleNode.id}"
-                                    th:text="${roleNode.name}"></option>
-                        </select>
+                        <div class="col-lg-4">
+                            <select id="roleSelect" th:field="*{roleEntity}" class="form-control">
+                                <option th:each="roleNode : ${roles}" th:value="${roleNode.id}"
+                                        th:text="${roleNode.name}"></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group">
-                    <label for="username" class="col-lg-3 control-label"
-                           th:text="#{registration.form.password}"></label>
+                <div class="row">
+                    <div class="form-group">
+                        <label for="username" class="col-lg-5 control-label"
+                               th:text="#{registration.form.password}"></label>
 
-                    <div class="col-lg-5">
-                        <label class="control-label" th:text="*{password}"></label>
+                        <div class="col-lg-4">
+                            <label class="control-label" th:text="*{password}"></label>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </fieldset>
-        <input type="submit" value="save"/>
-    </form>
-    <script th:inline="javascript">
-        var test = [[${staff.personalDataEntity.isMailAddress}]];
+            </fieldset>
+            <input type="submit" value="Dodaj"/>
+        </form>
+        <script th:inline="javascript">
+            var test = [[${staff.personalDataEntity.isMailAddress}]];
 
-        if(test === true) {
-            $('.collapse').collapse();
-        }
-    </script>
+            if (test === true) {
+                $('.collapse').collapse();
+            }
+        </script>
+    </div>
 </div>
 </body>
 </html>

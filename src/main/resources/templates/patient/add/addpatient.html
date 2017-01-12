@@ -14,8 +14,8 @@
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<h1 style="">Dodaj pacjenta</h1>
 <div class="container">
+    <div th:replace="fragments/header :: header">...</div>
     <div class="form">
         <form class="form-horizontal" th:action="@{/patient/add/addPatient}" th:object="${patient}" method="post">
             <h3>Dane:</h3>
@@ -59,9 +59,21 @@
                     </select></div>
                 </div>
             </div>
-            <div class="form-group row"><label class="col-lg-4 col-form-label"> Numer telefonu: </label>
-                <div class="col-lg-5"><input class="form-control" type="text" name="phonenumber"/></div>
-            </div>
+
+            <table style="table-layout: fixed;" class="table table-striped" th:unless="${#lists.isEmpty(patient.personalDataEntity.phoneNumbers)}">
+                <tr>
+                    <th class="col"></th>
+                    <th class="col">Rodzaj kontaktu</th>
+                    <th class="col">Numer</th>
+                </tr>
+                <tr style="padding-left: 0px;" th:each="contactPhone, rowStat : *{personalDataEntity.phoneNumbers}">
+                    <td><input style="width: 70px;" th:type="submit" name="removePhone" th:value="${rowStat.index}"></input></td>
+                    <td class="col"><input style="width: 160px; height: 50px; font-size: 16px;" type="text" class="form-control" th:field="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].description}"/></td>
+                    <td class="col"><input style="width: 160px; height: 50px; font-size: 16px;" type="number" class="form-control input-button-right" th:field="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].phoneNumber}"/></td>
+                </tr>
+            </table>
+            <input style="width: 200px;" th:type="submit" name="addPhone" value="Dodaj telefon"/>
+
             <h3>Adres: </h3>
             <div th:object="${patient.personalDataEntity.address}">
                 <div class="form-group row"><label class="col-lg-4 col-form-label"> Kraj pochodzenia: </label>
@@ -77,6 +89,66 @@
                     <div class="col-lg-5"><input class="form-control" type="text" th:field="*{street}"/></div>
                 </div>
             </div>
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+
+                            <div id="address-collapse" onclick="$('.collapse').collapse()" class="checkbox">
+                                <label data-toggle="collapse" data-target="#collapseOne">
+                                    <input style="width: auto;" type="checkbox" th:value="*{personalDataEntity.isMailAddress}"
+                                           th:checked="*{personalDataEntity.isMailAddress}"
+                                           th:field="*{personalDataEntity.isMailAddress}"/>
+                                    Adres do korespondencji (jeżeli jest inny niż zamieszkania)
+                                </label>
+                            </div>
+
+                        </h4>
+                    </div>
+
+                    <div th:id="'collapseOne'" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <div class="form-group" th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.country')} ? 'has-error'">
+                                    <label class="col-lg-4 col-form-label"> Kraj pochodzenia: </label>
+                                    <div class="col-lg-5"><input id="mailAddressCountry" type="text" th:field="*{personalDataEntity.mailAddress.country}" class="form-control"/>
+                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.country}">[error]</label></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group" th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.city')} ? 'has-error'">
+                                    <label class="col-lg-4 col-form-label"> Miasto: </label>
+                                    <div class="col-lg-5"><input id="mailAddressCity" type="text" th:field="*{personalDataEntity.mailAddress.city}" class="form-control"/>
+                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.city}">[error]</label></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group" th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.postalCode')} ? 'has-error'">
+                                    <label class="col-lg-4 col-form-label"> Kod pocztowy: </label>
+                                    <div class="col-lg-5"><input id="mailAddressPostalCode" type="text" th:field="*{personalDataEntity.mailAddress.postalCode}" class="form-control"/>
+                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.postalCode}">[error]</label></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group" th:classappend="${#fields.hasErrors('personalDataEntity.mailAddress.street')} ? 'has-error'">
+                                    <label class="col-lg-4 col-form-label"> Ulica: </label>
+                                    <div class="col-lg-5"><input id="mailAddressStreet" type="text" th:field="*{personalDataEntity.mailAddress.street}" class="form-control"/>
+                                        <label class="control-label" th:errors="*{personalDataEntity.mailAddress.street}">[error]</label></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
             <div>
                 <input type="submit" value="Dodaj pacjenta"/>
                 <input class="cancel" type="button" onclick="window.location.replace('/index')" value="Anuluj" />
