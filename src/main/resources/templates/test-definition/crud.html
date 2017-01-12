@@ -59,6 +59,13 @@
             </tr>
             </tbody>
         </table>
+
+        <a th:if="${patientId}" class="btn btn-default"
+           th:href="@{${'/patient/info/infoPatient'}(id=${patientId})}">
+            <span class="" aria-hidden="true"></span>
+            <th:block>Do pacjenta</th:block>
+        </a>
+
     </form>
     <div th:if="${not #lists.isEmpty(testDefinitions)}">
         <ul class="pagination">

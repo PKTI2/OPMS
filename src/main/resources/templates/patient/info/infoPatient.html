@@ -141,6 +141,12 @@
                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                 <th:block th:text="#{test.add}">Dodaj</th:block>
             </a>
+
+            <a th:if="${patientEntity.patientData.room}" class="btn btn-default"
+               th:href="@{${'/round/room'}(id=${patientEntity.patientData.room.id})}">
+                <span class="" aria-hidden="true"></span>
+                <th:block>Do pokoju</th:block>
+            </a>
         </fieldset>
     </th:block>
 
