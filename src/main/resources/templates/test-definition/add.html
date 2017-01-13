@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" th:href="@{/css/find.css}"/>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -18,75 +19,76 @@
 <div class="container">
 
     <div th:replace="fragments/header :: header">...</div>
-
-    <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
+    <div class="form">
+        <div class="alert alert-success alert-dismissible" role="alert" th:if="${success}">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;
     </span></button>
-        <th:block th:text="#{testDefinitionAddSuccess}">Sukces</th:block>
+            <th:block th:text="#{testDefinitionAddSuccess}">Sukces</th:block>
+        </div>
+
+
+        <form class="form-inline" th:action="@{/test-definition/add/update}" method="post">
+            <div class="alert alert-danger alert-dismissible" role="alert"
+                 th:each="err : ${#fields.errors('testDef.name')}"
+                 th:text="${err}"/>
+            <div class="alert alert-danger alert-dismissible" role="alert"
+                 th:each="err : ${#fields.errors('testDef.nodeEntities')}" th:text="${err}"/>
+            <div class="alert alert-danger alert-dismissible" role="alert"
+                 th:each="err : ${#fields.errors('newNode.label')}" th:text="${err}"/>
+            <div class="alert alert-danger alert-dismissible" role="alert"
+                 th:each="err : ${#fields.errors('newNode.nodeType')}" th:text="${err}"/>
+            <div class="form-group">
+                <label for="nodeName">Nazwa pola: </label>
+                <input type="text" th:onclick="${'javascript:clearField()'}" class="form-control" id="nodeName"
+                       th:field="${newNode.label}"/>
+            </div>
+            <div class="form-group">
+                <label for="nodeTypeSelect">Typ pola: </label>
+                <select id="nodeTypeSelect" th:field="*{newNode.nodeType}" class="form-control">
+                    <option th:each="nodeType : ${T(pl.opms.consts.NodeType).values()}" th:value="${nodeType}"
+                            th:text="#{${nodeType.displayName}}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" name="addNode" class="btn btn-default">Dodaj pole</button>
+            </div>
+
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Nazwa pola:</th>
+                    <th>Typ pola:</th>
+                    <th>Akcje</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="node, iter : ${testDef.nodeEntities}">
+                    <td th:text="${node.label}"></td>
+                    <td th:text="#{${node.nodeType.displayName}}"></td>
+                    <td>
+                        <button type="submit" class="btn btn-default" name="removeNode"
+                                th:value="${iter.index}">
+                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            <th:block th:text="#{remove}">Usuń Przykład</th:block>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <div class="form-group">
+                <label for="name">Nazwa badania: </label>
+                <input type="text" class="form-control" th:field="${testDef.name}" id="name"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" name="save" class="btn btn-default">Dodaj badanie</button>
+            </div>
+        </form>
+
     </div>
-
-
-    <form class="form-inline" th:action="@{/test-definition/add/update}" method="post">
-        <div class="alert alert-danger alert-dismissible" role="alert" th:each="err : ${#fields.errors('testDef.name')}"
-             th:text="${err}"/>
-        <div class="alert alert-danger alert-dismissible" role="alert"
-             th:each="err : ${#fields.errors('testDef.nodeEntities')}" th:text="${err}"/>
-        <div class="alert alert-danger alert-dismissible" role="alert"
-             th:each="err : ${#fields.errors('newNode.label')}" th:text="${err}"/>
-        <div class="alert alert-danger alert-dismissible" role="alert"
-             th:each="err : ${#fields.errors('newNode.nodeType')}" th:text="${err}"/>
-        <div class="form-group">
-            <label for="nodeName">Nazwa pola: </label>
-            <input type="text" th:onclick="${'javascript:clearField()'}" class="form-control" id="nodeName"
-                   th:field="${newNode.label}"/>
-        </div>
-        <div class="form-group">
-            <label for="nodeTypeSelect">Typ pola: </label>
-            <select id="nodeTypeSelect" th:field="*{newNode.nodeType}" class="form-control">
-                <option th:each="nodeType : ${T(pl.opms.consts.NodeType).values()}" th:value="${nodeType}"
-                        th:text="#{${nodeType.displayName}}"></option>
-            </select>
-        </div>
-        <div class="form-group">
-            <button type="submit" name="addNode" class="btn btn-default">Dodaj pole</button>
-        </div>
-
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Nazwa pola:</th>
-                <th>Typ pola:</th>
-                <th>Akcje</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="node, iter : ${testDef.nodeEntities}">
-                <td th:text="${node.label}"></td>
-                <td th:text="#{${node.nodeType.displayName}}"></td>
-                <td>
-                    <button type="submit" class="btn btn-default" name="removeNode"
-                            th:value="${iter.index}">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        <th:block th:text="#{remove}">Usuń Przykład</th:block>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-
-        <div class="form-group">
-            <label for="name">Nazwa badania: </label>
-            <input type="text" class="form-control" th:field="${testDef.name}" id="name"/>
-        </div>
-        <div class="form-group">
-            <button type="submit" name="save" class="btn btn-default">Dodaj badanie</button>
-        </div>
-    </form>
-
 </div>
-
 <script>
     function clearField() {
         document.getElementById("nodeName").value = ""

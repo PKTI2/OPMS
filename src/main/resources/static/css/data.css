@@ -40,6 +40,21 @@ label {
     border-radius: 10px;
 }
 
+.form input[type=submit] {
+    bottom: 10px;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: rgba(3, 175, 239, 0.8);
+    width: 150px;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
 .row {
     padding-top: 5px;
     padding-bottom: 5px;

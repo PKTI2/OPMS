@@ -8,6 +8,7 @@
     <!-- Bootstrap -->
     <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" th:href="@{/css/data.css}"/>
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -16,171 +17,191 @@
 <div class="container">
 
     <div th:replace="fragments/header :: header">...</div>
+    <div class="form">
+        <th:block th:object="${patientEntity}">
 
-    <th:block th:object="${patientEntity}">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <div onclick="$('.collapse').collapse()" class="checkbox">
+                                <label data-toggle="collapse" data-target="#collapseOne">
+                                    Informacje dotyczące pacjenta
+                                </label>
+                            </div>
+                        </h4>
+                    </div>
 
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <div onclick="$('.collapse').collapse()" class="checkbox">
-                            <label data-toggle="collapse" data-target="#collapseOne">
-                                Informacje dotyczące pacjenta
-                            </label>
-                        </div>
-                    </h4>
-                </div>
+                    <div th:id="'collapseOne'" class="panel-collapse collapse">
+                        <div class="panel-body">
 
-                <div th:id="'collapseOne'" class="panel-collapse collapse">
-                    <div class="panel-body">
-
-                        <table class="table">
-                            <tr>
-                                <th><h3>Dane:</h3></th>
-                                <th></th>
-                            </tr>
-
-                            <tr>
-                                <th> Imie:</th>
-                                <td th:text="*{personalDataEntity.firstName}"></td>
-                            </tr>
-                            <tr>
-                                <th> Nazwisko:</th>
-                                <td th:text="*{personalDataEntity.lastName}"></td>
-                            </tr>
-                            <tr>
-                                <th> Data urodzenia:</th>
-                                <td th:text="*{personalDataEntity.birthDate}"></td>
-                            </tr>
-                            <tr>
-                                <th> Numer PESEL:</th>
-                                <td th:text="*{personalDataEntity.peselNumber}"></td>
-                            </tr>
-
-                            <tr>
-                                <th> Waga:</th>
-                                <td th:include="fragments/utils :: unitLocalizer('kg',*{patientData.weight})"></td>
-
-                            </tr>
-                            <tr>
-                                <th> Wzrost:</th>
-                                <td th:include="fragments/utils :: unitLocalizer('cm',*{patientData.height})"></td>
-                            </tr>
-                            <tr>
-                                <th> Grupa krwi:</th>
-                                <td>
-                                    <th:block th:text="*{patientData.bloodType}"></th:block>
-                                    <th:block th:include="fragments/utils :: boolLocalizer('+','-',*{patientData.bloodAntigen})"></th:block>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th> Płeć:</th>
-                                <td th:with="gender = *{patientData.gender.displayName}" th:text="#{${gender}}"></td>
-                            </tr>
-
-                            <!--<tr>-->
-                                <!--<th> Numer telefonu:</th>-->
-                                <!--<td name="phonenumber"></td>-->
-                            <!--</tr>-->
-                            <div th:unless="${#lists.isEmpty(patientEntity.personalDataEntity.phoneNumbers)}">
-                                <tr><th><h3>Telefony: </h3></th><th></th></tr>
+                            <table class="table">
+                                <tr>
+                                    <th><h3>Dane:</h3></th>
+                                    <th></th>
+                                </tr>
 
                                 <tr>
+                                    <th> Imie:</th>
+                                    <td th:text="*{personalDataEntity.firstName}"></td>
+                                </tr>
+                                <tr>
+                                    <th> Nazwisko:</th>
+                                    <td th:text="*{personalDataEntity.lastName}"></td>
+                                </tr>
+                                <tr>
+                                    <th> Data urodzenia:</th>
+                                    <td th:text="*{personalDataEntity.birthDate}"></td>
+                                </tr>
+                                <tr>
+                                    <th> Numer PESEL:</th>
+                                    <td th:text="*{personalDataEntity.peselNumber}"></td>
+                                </tr>
+
+                                <tr>
+                                    <th> Waga:</th>
+                                    <td th:include="fragments/utils :: unitLocalizer('kg',*{patientData.weight})"></td>
+
+                                </tr>
+                                <tr>
+                                    <th> Wzrost:</th>
+                                    <td th:include="fragments/utils :: unitLocalizer('cm',*{patientData.height})"></td>
+                                </tr>
+                                <tr>
+                                    <th> Grupa krwi:</th>
+                                    <td>
+                                        <th:block th:text="*{patientData.bloodType}"></th:block>
+                                        <th:block
+                                                th:include="fragments/utils :: boolLocalizer('+','-',*{patientData.bloodAntigen})"></th:block>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th> Płeć:</th>
+                                    <td th:with="gender = *{patientData.gender.displayName}"
+                                        th:text="#{${gender}}"></td>
+                                </tr>
+
+                                <!--<tr>-->
+                                <!--<th> Numer telefonu:</th>-->
+                                <!--<td name="phonenumber"></td>-->
+                                <!--</tr>-->
+                                <div th:unless="${#lists.isEmpty(patientEntity.personalDataEntity.phoneNumbers)}">
+                                    <tr>
+                                        <th><h3>Telefony: </h3></th>
+                                        <th></th>
+                                    </tr>
+
+                                    <tr>
+                                        <th></th>
+                                        <th>Rodzaj kontaktu</th>
+                                        <th>numer</th>
+                                    </tr>
+                                    <tr th:each="contactPhone, rowStat : *{personalDataEntity.phoneNumbers}">
+                                        <td></td>
+                                        <td th:text="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].description}"></td>
+                                        <td th:text="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].phoneNumber}"></td>
+                                    </tr>
+                                </div>
+
+
+                                <tr>
+                                    <th><h3>Adres: </h3></th>
                                     <th></th>
-                                    <th>Rodzaj kontaktu</th>
-                                    <th>numer</th>
                                 </tr>
-                                <tr th:each="contactPhone, rowStat : *{personalDataEntity.phoneNumbers}">
-                                    <td></td>
-                                    <td th:text="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].description}"></td>
-                                    <td th:text="*{personalDataEntity.phoneNumbers[__${rowStat.index}__].phoneNumber}"></td>
+                                <tr th:object="${patientEntity.personalDataEntity.address}">
+                                    <th> Kraj pochodzenia:</th>
+                                    <td th:text="*{country}"></td>
                                 </tr>
-                            </div>
+                                <tr th:object="${patientEntity.personalDataEntity.address}">
+                                    <th> Miasto:</th>
+                                    <td th:text="*{city}"></td>
+                                </tr>
+                                <tr th:object="${patientEntity.personalDataEntity.address}">
+                                    <th> Kod pocztowy:</th>
+                                    <td th:text="*{postalCode}"></td>
+                                </tr>
+                                <tr th:object="${patientEntity.personalDataEntity.address}">
+                                    <th> Ulica:</th>
+                                    <td th:text="*{street}"></td>
+                                </tr>
+
+                                <div th:if="${patientEntity.personalDataEntity.isMailAddress}">
+                                    <tr>
+                                        <th><h3>Adres korespondencyjny: </h3></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr th:object="${patientEntity.personalDataEntity.mailAddress}">
+                                        <th> Kraj pochodzenia:</th>
+                                        <td th:text="*{country}"></td>
+                                    </tr>
+                                    <tr th:object="${patientEntity.personalDataEntity.mailAddress}">
+                                        <th> Miasto:</th>
+                                        <td th:text="*{city}"></td>
+                                    </tr>
+                                    <tr th:object="${patientEntity.personalDataEntity.mailAddress}">
+                                        <th> Kod pocztowy:</th>
+                                        <td th:text="*{postalCode}"></td>
+                                    </tr>
+                                    <tr th:object="${patientEntity.personalDataEntity.mailAddress}">
+                                        <th> Ulica:</th>
+                                        <td th:text="*{street}"></td>
+                                    </tr>
+                                </div>
+
+                                <!--<tr><th><h3>Adres korespondencyjny: </h3></th><th></th></tr>-->
+                                <!--<tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Kraj pochodzenia: </th><td th:text="*{country}"></td></tr>-->
+                                <!--<tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Miasto: </th><td th:text="*{city}"></td></tr>-->
+                                <!--<tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Kod pocztowy: </th><td th:text="*{postalCode}"></td></tr>-->
+                                <!--<tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Ulica: </th><td th:text="*{street}"></td></tr>-->
+
+                                <!--<tr th:object="${patientEntity.patientData}"><th> Oddział: </th><td th:text="*{department}"></td></tr>-->
+                                <!--<tr th:object="${patientEntity.patientData}"><th> Pokój: </th><td th:text="*{room}"></td></tr>-->
+
+                            </table>
 
 
-                            <tr>
-                                <th><h3>Adres: </h3></th>
-                                <th></th>
-                            </tr>
-                            <tr th:object="${patientEntity.personalDataEntity.address}">
-                                <th> Kraj pochodzenia:</th>
-                                <td th:text="*{country}"></td>
-                            </tr>
-                            <tr th:object="${patientEntity.personalDataEntity.address}">
-                                <th> Miasto:</th>
-                                <td th:text="*{city}"></td>
-                            </tr>
-                            <tr th:object="${patientEntity.personalDataEntity.address}">
-                                <th> Kod pocztowy:</th>
-                                <td th:text="*{postalCode}"></td>
-                            </tr>
-                            <tr th:object="${patientEntity.personalDataEntity.address}">
-                                <th> Ulica:</th>
-                                <td th:text="*{street}"></td>
-                            </tr>
-
-                            <div th:if="${patientEntity.personalDataEntity.isMailAddress}">
-                                <tr><th><h3>Adres korespondencyjny: </h3></th><th></th></tr>
-                                <tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Kraj pochodzenia: </th><td th:text="*{country}"></td></tr>
-                                <tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Miasto: </th><td th:text="*{city}"></td></tr>
-                                <tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Kod pocztowy: </th><td th:text="*{postalCode}"></td></tr>
-                                <tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Ulica: </th><td th:text="*{street}"></td></tr>
-                            </div>
-
-                            <!--<tr><th><h3>Adres korespondencyjny: </h3></th><th></th></tr>-->
-                            <!--<tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Kraj pochodzenia: </th><td th:text="*{country}"></td></tr>-->
-                            <!--<tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Miasto: </th><td th:text="*{city}"></td></tr>-->
-                            <!--<tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Kod pocztowy: </th><td th:text="*{postalCode}"></td></tr>-->
-                            <!--<tr th:object="${patientEntity.personalDataEntity.mailAddress}"><th> Ulica: </th><td th:text="*{street}"></td></tr>-->
-
-                            <!--<tr th:object="${patientEntity.patientData}"><th> Oddział: </th><td th:text="*{department}"></td></tr>-->
-                            <!--<tr th:object="${patientEntity.patientData}"><th> Pokój: </th><td th:text="*{room}"></td></tr>-->
-
-                        </table>
-
-
-                        <!--<form class="form-inline" th:action="@{/patient/info/edit}" method="post">-->
+                            <!--<form class="form-inline" th:action="@{/patient/info/edit}" method="post">-->
                             <!--<button type="submit" class="btn btn-default">-->
-                                <!--<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>-->
-                                <!--<th:block>Edytuj</th:block>-->
+                            <!--<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>-->
+                            <!--<th:block>Edytuj</th:block>-->
                             <!--</button>-->
-                        <!--</form>-->
+                            <!--</form>-->
 
 
-                            <a class="btn btn-default" th:href="@{${'/patient/edit/editPatient'}(id=${patientEntity.id})}">
+                            <a class="btn btn-default"
+                               th:href="@{${'/patient/edit/editPatient'}(id=${patientEntity.id})}">
                                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                                 <th:block>Edytuj</th:block>
                             </a>
 
 
-
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <fieldset>
-            <legend th:text="#{patient.tests}">Badania:</legend>
-            <a class="btn btn-default"
-               th:href="@{${'/test-instance/browse'}(patientId=${patientEntity.id})}">
-                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                <th:block th:text="#{patient.browseTests}">Przeglądaj badania</th:block>
-            </a>
+            <fieldset>
+                <legend th:text="#{patient.tests}">Badania:</legend>
+                <a class="btn btn-default"
+                   th:href="@{${'/test-instance/browse'}(patientId=${patientEntity.id})}">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    <th:block th:text="#{patient.browseTests}">Przeglądaj badania</th:block>
+                </a>
 
-            <a class="btn btn-default"
-               th:href="@{${'/test-definition/crud'}(patientId=${patientEntity.id})}">
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-                <th:block th:text="#{test.add}">Dodaj</th:block>
-            </a>
+                <a class="btn btn-default"
+                   th:href="@{${'/test-definition/crud'}(patientId=${patientEntity.id})}">
+                    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                    <th:block th:text="#{test.add}">Dodaj</th:block>
+                </a>
 
-            <a th:if="${patientEntity.patientData.room}" class="btn btn-default"
-               th:href="@{${'/round/room'}(id=${patientEntity.patientData.room.id})}">
-                <span class="" aria-hidden="true"></span>
-                <th:block>Do pokoju</th:block>
-            </a>
-        </fieldset>
-    </th:block>
+                <a th:if="${patientEntity.patientData.room}" class="btn btn-default"
+                   th:href="@{${'/round/room'}(id=${patientEntity.patientData.room.id})}">
+                    <span class="" aria-hidden="true"></span>
+                    <th:block>Do pokoju</th:block>
+                </a>
+            </fieldset>
+        </th:block>
 
+    </div>
 </div>
-
 </body>
 </html>
