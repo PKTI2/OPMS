@@ -34,6 +34,9 @@ public class PatientService {
     public void save(PatientEntity patientEntity) {
         patientRepository.save(patientEntity);
     }
+    public void update(PatientEntity patientEntity) {
+        patientRepository.save(patientEntity);
+    }
 
     public PatientEntity findOne(Long patientId) {
         return patientRepository.findOne(patientId);

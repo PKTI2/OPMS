@@ -5,7 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import pl.opms.be.entity.PatientEntity;
-import pl.opms.be.entity.TestDefinitionEntity;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ import java.util.List;
  */
 @Repository
 public interface PatientRepository extends PagingAndSortingRepository<PatientEntity, Long>,
-        QueryDslPredicateExecutor<PatientEntity> {
+        QueryDslPredicateExecutor<PatientEntity>,CrudRepository<PatientEntity, Long> {
 
     List<PatientEntity> findByPersonalDataEntityFirstName(String firstname);
     List<PatientEntity> findByPersonalDataEntityLastName(String lastname);
