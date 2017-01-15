@@ -30,7 +30,6 @@ public class EditPatientController {
     @Autowired
     private PatientValidator patientValidator;
 
-    @Autowired
     private static Long id;
 
 //    @PostConstruct

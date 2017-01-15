@@ -69,30 +69,6 @@ public class FindPatientController {
         return modelView;
     }
 
-//    @RequestMapping(value = "/patient/find/searchByFirstName", method = RequestMethod.POST)
-//    public ModelAndView searchByFirstName(@ModelAttribute SearchBean searchBean) {
-//        QPatientEntity qPatientEntity = QPatientEntity.patientEntity;
-//        predicate = qPatientEntity.personalDataEntity.firstName.contains(searchBean.getSearchTermFirstName());
-//        ModelAndView modelAndView = new ModelAndView("redirect:/patient/find");
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/patient/find/searchByLastName", method = RequestMethod.POST)
-//    public ModelAndView searchByLastName(@ModelAttribute SearchBean searchBean) {
-//        QPatientEntity qPatientEntity = QPatientEntity.patientEntity;
-//        predicate = qPatientEntity.personalDataEntity.lastName.contains(searchBean.getSearchTermLastName());
-//        ModelAndView modelAndView = new ModelAndView("redirect:/patient/find");
-//        return modelAndView;
-//    }
-//
-//    @RequestMapping(value = "/patient/find/searchByPeselNumber", method = RequestMethod.POST)
-//    public ModelAndView searchByPeselNumber(@ModelAttribute SearchBean searchBean) {
-//        QPatientEntity qPatientEntity = QPatientEntity.patientEntity;
-//        predicate = qPatientEntity.personalDataEntity.peselNumber.contains(searchBean.getSearchTermPeselNumber());
-//        ModelAndView modelAndView = new ModelAndView("redirect:/patient/find");
-//        return modelAndView;
-//    }
-
     @RequestMapping(value = "/patient/find/searchByAll", method = RequestMethod.POST)
     public ModelAndView searchByAll(@ModelAttribute SearchBean searchBean) {
         QPatientEntity qPatientEntity = QPatientEntity.patientEntity;
@@ -110,10 +86,7 @@ public class FindPatientController {
         PatientEntity selected = page.getContent().get(rowIndex);
         System.out.print("selected in find: "+selected+"\n");
         redirectAttributes.addFlashAttribute("patientEntity", selected);
-//        return "redirect:/patient/info/infoPatient";
         return new ModelAndView("redirect:/patient/info/infoPatient");
     }
 }
 
-
-//http://www.mkyong.com/spring-mvc/spring-4-mvc-ajax-hello-world-example/
